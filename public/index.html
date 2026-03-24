@@ -1,223 +1,480 @@
 <!DOCTYPE html>
-<html>
+<html lang="ca">
   <head>
     <meta charset="utf-8" />
-    <title>Items</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="SecondByte · Repair & Exchange Hub" />
+    <meta name="theme-color" content="#ff4fb3" />
+
+    <title>SecondByte</title>
+    <link rel="icon" type="image/png" href="Logo Favicon_redondo.png" />
+
     <link
       rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     />
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
+    <link rel="stylesheet" href="index.css" />
   </head>
 
   <body>
-    <div class="container p-5">
-      <div class="row">
-        <div class="col-8 offset-2" id="loginForm">
-          <form>
-            <div class="form-group row">
-              <label for="title" class="col-4 col-form-label">Correu electrònic:</label>
-              <div class="col-8">
-                <input type="email" class="form-control" id="loginEmail" />
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="content" class="col-4 col-form-label">Contrasenya:</label>
-              <div class="col-8">
-                <input type="password" class="form-control" id="loginPassword" />
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="offset-4 col-8">
-                <button type="button" id="newUser" class="btn btn-outline-primary float-right">
-                  Registrar un nou usuari
-                </button>
-                <button type="button" id="login" class="btn btn-default float-right mr-3">
-                  Entrar
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
+    <div id="alert" role="alert" aria-live="polite"></div>
 
-        <div class="col-8 offset-2" id="signupForm" style="display: none">
-          <form>
-            <div class="form-group row">
-              <label for="title" class="col-4 col-form-label">Correu electrònic:</label>
-              <div class="col-8">
-                <input type="email" class="form-control" id="signupEmail" />
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="content" class="col-4 col-form-label">Contrasenya:</label>
-              <div class="col-8">
-                <input type="password" class="form-control" id="signupPassword" />
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="content" class="col-4 col-form-label">Confirmar contrasenya:</label>
-              <div class="col-8">
-                <input type="password" class="form-control" id="signupPasswordConfirm" />
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="offset-4 col-8">
-                <button type="button" id="signup" class="btn btn-default float-right">
-                  Enviar
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
+    <main class="container p-5">
+      <header class="text-center mb-5">
+        <img
+          src="SecondByte Logo BIG.png"
+          alt="Logo de SecondByte"
+          class="main-logo img-fluid"
+        />
+        
+      </header>
 
-        <div class="col-8 offset-2" id="itemsForm" style="display: none">
-          <form>
-            <div class="form-group row">
-              <label for="title" class="col-4 col-form-label">Títol:</label>
-              <div class="col-8">
-                <input type="text" class="form-control" id="title" />
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="content" class="col-4 col-form-label"
-                >Contingut:</label
-              >
-              <div class="col-8">
-                <input type="text" class="form-control" id="content" />
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="offset-4 col-8">
-                <button type="button" id="save" class="btn btn-default float-right">
-                  Guardar
-                </button>
-              </div>
-            </div>
-            <input type="hidden" id="elementId" />
-          </form>
+      <section id="topBar" class="d-none mb-4">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+          <div class="mb-3 mb-md-0">
+            <h2 class="h5 mb-1">Panell de gestió</h2>
+            <p id="authStatus" class="mb-0 text-muted"></p>
+          </div>
+          <button type="button" id="logout" class="btn btn-outline-primary">
+            Tancar sessió
+          </button>
         </div>
+      </section>
 
-        <div class="col-2">
-          <div id="alert" role="alert"></div>
+      <section class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <div id="loginForm">
+            <form id="loginFormElement" novalidate>
+              <h2 class="h4 mb-4">Iniciar sessió</h2>
+
+              <div class="form-group row">
+                <label for="loginEmail" class="col-md-4 col-form-label">
+                  Correu electrònic:
+                </label>
+                <div class="col-md-8">
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="loginEmail"
+                    placeholder="Introdueix el teu correu"
+                    autocomplete="email"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="loginPassword" class="col-md-4 col-form-label">
+                  Contrasenya:
+                </label>
+                <div class="col-md-8">
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="loginPassword"
+                    placeholder="Introdueix la teva contrasenya"
+                    autocomplete="current-password"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row mb-0">
+                <div class="offset-md-4 col-md-8 d-flex flex-column flex-md-row justify-content-md-end">
+                  <button
+                    type="button"
+                    id="newUser"
+                    class="btn btn-outline-primary mb-2 mb-md-0"
+                  >
+                    Registrar un nou usuari
+                  </button>
+                  <button
+                    type="submit"
+                    id="login"
+                    class="btn btn-default ml-md-3"
+                  >
+                    Entrar
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div id="signupForm" class="d-none">
+            <form id="signupFormElement" novalidate>
+              <h2 class="h4 mb-4">Crear compte</h2>
+
+              <div class="form-group row">
+                <label for="signupEmail" class="col-md-4 col-form-label">
+                  Correu electrònic:
+                </label>
+                <div class="col-md-8">
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="signupEmail"
+                    placeholder="Introdueix el teu correu"
+                    autocomplete="email"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="signupPassword" class="col-md-4 col-form-label">
+                  Contrasenya:
+                </label>
+                <div class="col-md-8">
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="signupPassword"
+                    placeholder="Mínim 8 caràcters"
+                    autocomplete="new-password"
+                    minlength="8"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="signupPasswordConfirm" class="col-md-4 col-form-label">
+                  Confirmar contrasenya:
+                </label>
+                <div class="col-md-8">
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="signupPasswordConfirm"
+                    placeholder="Repeteix la contrasenya"
+                    autocomplete="new-password"
+                    minlength="8"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row mb-0">
+                <div class="offset-md-4 col-md-8 d-flex flex-column flex-md-row justify-content-md-end">
+                  <button
+                    type="button"
+                    id="backToLogin"
+                    class="btn btn-outline-primary mb-2 mb-md-0"
+                  >
+                    Tornar
+                  </button>
+                  <button
+                    type="submit"
+                    id="signup"
+                    class="btn btn-default ml-md-3"
+                  >
+                    Enviar
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div id="itemsPanel" class="d-none">
+            <div id="itemsForm">
+              <form id="itemsFormElement" novalidate>
+                <h2 class="h4 mb-4">Crear o editar element</h2>
+
+                <div class="form-group row">
+                  <label for="title" class="col-md-4 col-form-label">
+                    Títol:
+                  </label>
+                  <div class="col-md-8">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="title"
+                      placeholder="Escriu un títol"
+                      maxlength="100"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="content" class="col-md-4 col-form-label">
+                    Contingut:
+                  </label>
+                  <div class="col-md-8">
+                    <textarea
+                      class="form-control"
+                      id="content"
+                      rows="4"
+                      placeholder="Escriu el contingut de l'element"
+                      required
+                    ></textarea>
+                  </div>
+                </div>
+
+                <div class="form-group row mb-0">
+                  <div class="offset-md-4 col-md-8 d-flex flex-column flex-md-row justify-content-md-end">
+                    <button
+                      type="button"
+                      id="clearItem"
+                      class="btn btn-outline-primary mb-2 mb-md-0"
+                    >
+                      Netejar
+                    </button>
+                    <button
+                      type="submit"
+                      id="save"
+                      class="btn btn-default ml-md-3"
+                    >
+                      Guardar
+                    </button>
+                  </div>
+                </div>
+
+                <input type="hidden" id="elementId" />
+              </form>
+            </div>
+
+            <div id="emptyState" class="text-center mt-4 d-none">
+              <p class="mb-0">Encara no hi ha cap element creat.</p>
+            </div>
+
+            <div class="table-responsive mt-4">
+              <table
+                class="table table-hover d-none"
+                id="listItems"
+                aria-live="polite"
+              ></table>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="table-responsive">
-        <table class="table table-hover" id="listItems" style="display: none"></table>
-      </div>
-    </div>
+      </section>
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
+
+    <script src="js/config.js"></script>
+    <script src="js/firestore.js"></script>
+    <script src="js/items.js"></script>
+
+    <script>
+      function showAlert(text, type) {
+        const alertEl = document.getElementById("alert");
+        alertEl.innerText = text;
+        alertEl.className = `alert ${type}`;
+        alertEl.style.display = "block";
+
+        setTimeout(() => {
+          alertEl.style.display = "none";
+        }, 2500);
+      }
+
+      function getFirebaseErrorMessage(error) {
+        if (!error || !error.code) {
+          return "S'ha produït un error inesperat";
+        }
+
+        switch (error.code) {
+          case "auth/invalid-email":
+            return "El correu electrònic no és vàlid";
+          case "auth/user-disabled":
+            return "Aquest compte està desactivat";
+          case "auth/user-not-found":
+            return "No existeix cap usuari amb aquest correu";
+          case "auth/wrong-password":
+            return "La contrasenya no és correcta";
+          case "auth/email-already-in-use":
+            return "Aquest correu ja està registrat";
+          case "auth/weak-password":
+            return "La contrasenya és massa feble";
+          default:
+            return "S'ha produït un error: " + error.message;
+        }
+      }
+
+      function showLogin() {
+        document.getElementById("loginForm").classList.remove("d-none");
+        document.getElementById("signupForm").classList.add("d-none");
+        document.getElementById("itemsPanel").classList.add("d-none");
+        document.getElementById("topBar").classList.add("d-none");
+        document.getElementById("listItems").classList.add("d-none");
+      }
+
+      function showSignup() {
+        document.getElementById("loginForm").classList.add("d-none");
+        document.getElementById("signupForm").classList.remove("d-none");
+        document.getElementById("itemsPanel").classList.add("d-none");
+        document.getElementById("topBar").classList.add("d-none");
+        document.getElementById("listItems").classList.add("d-none");
+      }
+
+      function showItems(user) {
+        document.getElementById("loginForm").classList.add("d-none");
+        document.getElementById("signupForm").classList.add("d-none");
+        document.getElementById("itemsPanel").classList.remove("d-none");
+        document.getElementById("topBar").classList.remove("d-none");
+        document.getElementById("listItems").classList.remove("d-none");
+        document.getElementById("authStatus").innerText = `Sessió iniciada com ${user.email}`;
+      }
+
+      function clearItemForm() {
+        document.getElementById("elementId").value = "";
+        document.getElementById("title").value = "";
+        document.getElementById("content").value = "";
+      }
+
+      async function refreshItemsView() {
+        await loadItems();
+
+        const table = document.getElementById("listItems");
+        const emptyState = document.getElementById("emptyState");
+
+        if (table.innerHTML.trim() === "") {
+          emptyState.classList.remove("d-none");
+          table.classList.add("d-none");
+        } else {
+          emptyState.classList.add("d-none");
+          table.classList.remove("d-none");
+        }
+      }
+
+      document.getElementById("newUser").addEventListener("click", () => {
+        showSignup();
+      });
+
+      document.getElementById("backToLogin").addEventListener("click", () => {
+        showLogin();
+      });
+
+      document.getElementById("clearItem").addEventListener("click", () => {
+        clearItemForm();
+      });
+
+      document.getElementById("logout").addEventListener("click", async () => {
+        try {
+          await auth.signOut();
+          showAlert("Sessió tancada correctament", "alert-success");
+        } catch (error) {
+          showAlert(getFirebaseErrorMessage(error), "alert-danger");
+        }
+      });
+
+      document
+        .getElementById("loginFormElement")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          const email = document.getElementById("loginEmail").value.trim();
+          const password = document.getElementById("loginPassword").value;
+
+          if (!email) {
+            showAlert("El correu electrònic és obligatori", "alert-danger");
+            return;
+          }
+
+          if (!password) {
+            showAlert("La contrasenya és obligatòria", "alert-danger");
+            return;
+          }
+
+          try {
+            await auth.signInWithEmailAndPassword(email, password);
+            showAlert("Usuari autenticat correctament", "alert-success");
+          } catch (error) {
+            showAlert(getFirebaseErrorMessage(error), "alert-danger");
+          }
+        });
+
+      document
+        .getElementById("signupFormElement")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          const email = document.getElementById("signupEmail").value.trim();
+          const password = document.getElementById("signupPassword").value;
+          const passwordConfirm = document.getElementById("signupPasswordConfirm").value;
+
+          if (!email || email.indexOf("@") < 1) {
+            showAlert("Email incorrecte", "alert-danger");
+            return;
+          }
+
+          if (!password) {
+            showAlert("La contrasenya és obligatòria", "alert-danger");
+            return;
+          }
+
+          if (password.length < 8) {
+            showAlert(
+              "La contrasenya ha de tenir una longitud mínima de 8 caràcters",
+              "alert-danger"
+            );
+            return;
+          }
+
+          if (password !== passwordConfirm) {
+            showAlert("Les contrasenyes no coincideixen", "alert-danger");
+            return;
+          }
+
+          try {
+            await auth.createUserWithEmailAndPassword(email, password);
+
+            showAlert("Usuari creat correctament", "alert-success");
+            document.getElementById("signupFormElement").reset();
+            showLogin();
+          } catch (error) {
+            showAlert(getFirebaseErrorMessage(error), "alert-danger");
+          }
+        });
+
+      document
+        .getElementById("itemsFormElement")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          const id = document.getElementById("elementId").value;
+          const title = document.getElementById("title").value.trim();
+          const content = document.getElementById("content").value.trim();
+
+          if (!title) {
+            showAlert("El títol és obligatori", "alert-danger");
+            return;
+          }
+
+          if (!content) {
+            showAlert("El contingut és obligatori", "alert-danger");
+            return;
+          }
+
+          const doc = { title, content };
+
+          try {
+            if (!id) {
+              await addItem(doc);
+              showAlert("Element creat correctament", "alert-success");
+            } else {
+              await updateItem(id, doc);
+              showAlert("Element actualitzat correctament", "alert-success");
+            }
+
+            clearItemForm();
+            await refreshItemsView();
+          } catch (error) {
+            showAlert("No s'ha pogut guardar l'element", "alert-danger");
+          }
+        });
+
+      auth.onAuthStateChanged(async (user) => {
+        if (user) {
+          showItems(user);
+          await refreshItemsView();
+        } else {
+          clearItemForm();
+          showLogin();
+        }
+      });
+    </script>
   </body>
-  <script language="javascript" src="js/config.js"></script>
-  <script language="javascript" src="js/firestore.js"></script>
-  <script language="javascript" src="js/items.js"></script>
-  <script language="javascript">
-    
-	// Funció per mostrar alertes a la UI
-    function showAlert(text, type) {
-      // Modifiquem el text i la classe CSS segons el tipus d'alerta
-      const alertEl = document.getElementById("alert");
-      alertEl.innerText = text;
-      alertEl.className = `alert ${type}`;
-      alertEl.style.display = "block";
-
-      // Disparem un temporitzador per ocultar l'alerta a 2 segons
-      setTimeout(() => {
-        alertEl.style.display = "none";
-      }, 2000);
-    }
-
-    // Quan la pàgina hagi carregat completament, carreguem els ítems
-    window.addEventListener("load", async () => {
-      await loadItems(); // Carrega i mostra la llista d'ítems
-    });
-
-    // Handler per a l'inici de sessió
-    document.getElementById("login").addEventListener("click", async () => {
-      // Obtenim credencials del formulari
-      const email = document.getElementById("loginEmail").value;
-      const password = document.getElementById("loginPassword").value;
-
-      try {
-        // Intentem autenticar l'usuari amb Firebase Auth
-        await auth.signInWithEmailAndPassword(email, password);
-
-        // Si té èxit, mostrem missatge i canviem la UI
-        showAlert("Usuari autenticat", "alert-success");
-        document.getElementById("loginForm").style.display = "none";
-        document.getElementById("itemsForm").style.display = "block";
-        document.getElementById("listItems").style.display = "table";
-      } catch (error) {
-        // En cas d'error, mostrem alerta d'avís
-        showAlert("Error d’autenticació", "alert-danger");
-      }
-    });
-
-    // Handler per mostrar el formulari de registre d'usuari nou
-    document.getElementById("newUser").addEventListener("click", () => {
-      document.getElementById("loginForm").style.display = "none";
-      document.getElementById("signupForm").style.display = "block";
-    });
-
-    // Handler per al registre d'un nou usuari
-    document.getElementById("signup").addEventListener("click", async () => {
-      // Llegim valors del formulari
-      const email = document.getElementById("signupEmail").value;
-      const password = document.getElementById("signupPassword").value;
-      const passwordConfirm = document.getElementById(
-        "signupPasswordConfirm"
-      ).value;
-
-      // Validacions bàsiques de formulari
-      if (!email || email.indexOf("@") < 1) {
-        showAlert("Email incorrecte", "alert-danger");
-        return;
-      }
-      if (!password) {
-        showAlert("La contrasenya és obligatòria", "alert-danger");
-        return;
-      }
-      if (password.length < 8) {
-        showAlert("La contrasenya ha de tenir una longitud mínima de 8 caràcters", "alert-danger");
-        return;
-      }
-      if (password !== passwordConfirm) {
-        showAlert("Les contrasenyes no coincideixen", "alert-danger");
-        return;
-      }
-
-      try {
-        // Creem l'usuari amb Firebase Auth
-        await auth.createUserWithEmailAndPassword(email, password);
-
-        // Si té èxit, mostrem missatge i tornem a la vista de login
-        showAlert("Usuari creat correctament", "alert-success");
-        document.getElementById("loginForm").style.display = "block";
-        document.getElementById("signupForm").style.display = "none";
-      } catch (error) {
-        // En cas d'error, mostrem alerta
-        showAlert("Error al intentar crear l'usuari", "alert-danger");
-      }
-    });
-
-    // Handler per guardar o actualitzar un ítem
-    document.getElementById("save").addEventListener("click", async () => {
-      // Obtenim valors del formulari
-      const id = document.getElementById("elementId").value;
-      const title = document.getElementById("title").value;
-      const content = document.getElementById("content").value;
-      const doc = { title, content }; // Objecte amb les dades a desar
-
-      if (!id) {
-        // Si no hi ha ID, afegim un nou ítem
-        await addItem(doc);
-      } else {
-        // Si hi ha ID, actualitzem l'ítem existent
-        await updateItem(id, doc);
-      }
-    });
-	
-  </script>
 </html>
