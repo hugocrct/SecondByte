@@ -47,14 +47,6 @@ El nostre nom serà **SecondByte**, ja que s’adequa a les nostres intencions i
 
 ---
 
-## 3. Logotip del producte
-
-![Logo SecondByte](./logo.png)
-
-> ⚠️ Sustituye `./logo.png` por la ruta real de tu imagen
-
----
-
 ## 4. Descripció de la finalitat del producte
 
 **Hub de Components i Guies de Reparació**
