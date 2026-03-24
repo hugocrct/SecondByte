@@ -24,6 +24,6 @@ jobs:
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SECONDBYTE33 }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SECONDBYTE_4804A }}
           projectId: secondbyte-4804a
           channelId: pr-${{ github.event.pull_request.number }}
