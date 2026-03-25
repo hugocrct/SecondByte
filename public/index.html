@@ -1,480 +1,694 @@
 <!DOCTYPE html>
 <html lang="ca">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="SecondByte · Repair & Exchange Hub" />
-    <meta name="theme-color" content="#ff4fb3" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SecondByte - Repair & Exchange Hub</title>
+  <meta name="description" content="SecondByte és un hub d'economia circular tecnològica amb marketplace de components, guies de reparació, autenticació i gestió d'items amb Firebase." />
+  <meta name="theme-color" content="#ff4fb3" />
+  <link rel="icon" type="image/png" href="Logo Favicon_redondo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="style21.css" />
+</head>
+<body>
+  <div id="alert" role="alert" aria-live="polite"></div>
 
-    <title>SecondByte</title>
-    <link rel="icon" type="image/png" href="Logo Favicon_redondo.png" />
+  <header class="site-header">
+    <nav class="nav shell">
+      <a class="brand" href="#top" aria-label="SecondByte">
+        <img class="brand-mark" src="Logo Favicon_redondo.png" alt="Logo rodó de SecondByte" />
+        <span class="brand-copy">
+          <span class="brand-title">SecondByte</span>
+          <span class="brand-subtitle">Repair &amp; Exchange Hub</span>
+        </span>
+      </a>
 
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    />
-    <link rel="stylesheet" href="index.css" />
-  </head>
+      <ul class="nav-links">
+        <li><a href="#projecte">Projecte</a></li>
+        <li><a href="#funcionalitats">Funcionalitats</a></li>
+        <li><a href="#marketplace">Marketplace</a></li>
+        <li><a href="#portal">Portal</a></li>
+      </ul>
 
-  <body>
-    <div id="alert" role="alert" aria-live="polite"></div>
+      <div class="nav-right">
+        <a class="nav-mail" href="mailto:support@secondbyte.cat">support@secondbyte.cat</a>
+        <a class="btn btn-primary" href="#portal">Entrar</a>
+      </div>
+    </nav>
+  </header>
 
-    <main class="container p-5">
-      <header class="text-center mb-5">
-        <img
-          src="SecondByte Logo BIG.png"
-          alt="Logo de SecondByte"
-          class="main-logo img-fluid"
-        />
-        
-      </header>
+  <main id="top">
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Green IT · Circular Economy</span>
+          <h1 class="hero-title">
+            Dona una <span class="gradient-text">segona vida</span><br />
+            a la teva tecnologia.
+          </h1>
+          <p class="hero-text">
+            SecondByte és un hub digital per intercanviar components, consultar guies de reparació i gestionar publicacions amb autenticació real. Menys residu, més utilitat i una UI que no sembla feta a les tres de la matinada amb cafè dolent.
+          </p>
 
-      <section id="topBar" class="d-none mb-4">
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center">
-          <div class="mb-3 mb-md-0">
-            <h2 class="h5 mb-1">Panell de gestió</h2>
-            <p id="authStatus" class="mb-0 text-muted"></p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#portal">Accedir al portal</a>
+            <a class="btn btn-secondary" href="#funcionalitats">Veure funcionalitats</a>
           </div>
-          <button type="button" id="logout" class="btn btn-outline-primary">
-            Tancar sessió
-          </button>
+
+          <div class="hero-stats">
+            <article class="stat-card">
+              <span class="stat-value">4</span>
+              <span class="stat-label">Eixos clau del producte per comprar, reparar, validar i valorar components.</span>
+            </article>
+            <article class="stat-card">
+              <span class="stat-value">Auth + Firestore</span>
+              <span class="stat-label">Autenticació d'usuaris i gestió d'items preparada per Firebase.</span>
+            </article>
+            <article class="stat-card">
+              <span class="stat-value">Dark UI</span>
+              <span class="stat-label">Identitat visual eficient, llegible i alineada amb el projecte.</span>
+            </article>
+          </div>
         </div>
-      </section>
 
-      <section class="row">
-        <div class="col-lg-8 offset-lg-2">
-          <div id="loginForm">
-            <form id="loginFormElement" novalidate>
-              <h2 class="h4 mb-4">Iniciar sessió</h2>
-
-              <div class="form-group row">
-                <label for="loginEmail" class="col-md-4 col-form-label">
-                  Correu electrònic:
-                </label>
-                <div class="col-md-8">
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="loginEmail"
-                    placeholder="Introdueix el teu correu"
-                    autocomplete="email"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label for="loginPassword" class="col-md-4 col-form-label">
-                  Contrasenya:
-                </label>
-                <div class="col-md-8">
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="loginPassword"
-                    placeholder="Introdueix la teva contrasenya"
-                    autocomplete="current-password"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div class="form-group row mb-0">
-                <div class="offset-md-4 col-md-8 d-flex flex-column flex-md-row justify-content-md-end">
-                  <button
-                    type="button"
-                    id="newUser"
-                    class="btn btn-outline-primary mb-2 mb-md-0"
-                  >
-                    Registrar un nou usuari
-                  </button>
-                  <button
-                    type="submit"
-                    id="login"
-                    class="btn btn-default ml-md-3"
-                  >
-                    Entrar
-                  </button>
-                </div>
-              </div>
-            </form>
+        <div class="hero-visual glass-panel">
+          <div class="hero-logo-frame">
+            <img class="hero-logo" src="SecondByte Logo BIG.png" alt="Logo principal de SecondByte" />
           </div>
-
-          <div id="signupForm" class="d-none">
-            <form id="signupFormElement" novalidate>
-              <h2 class="h4 mb-4">Crear compte</h2>
-
-              <div class="form-group row">
-                <label for="signupEmail" class="col-md-4 col-form-label">
-                  Correu electrònic:
-                </label>
-                <div class="col-md-8">
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="signupEmail"
-                    placeholder="Introdueix el teu correu"
-                    autocomplete="email"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label for="signupPassword" class="col-md-4 col-form-label">
-                  Contrasenya:
-                </label>
-                <div class="col-md-8">
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="signupPassword"
-                    placeholder="Mínim 8 caràcters"
-                    autocomplete="new-password"
-                    minlength="8"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label for="signupPasswordConfirm" class="col-md-4 col-form-label">
-                  Confirmar contrasenya:
-                </label>
-                <div class="col-md-8">
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="signupPasswordConfirm"
-                    placeholder="Repeteix la contrasenya"
-                    autocomplete="new-password"
-                    minlength="8"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div class="form-group row mb-0">
-                <div class="offset-md-4 col-md-8 d-flex flex-column flex-md-row justify-content-md-end">
-                  <button
-                    type="button"
-                    id="backToLogin"
-                    class="btn btn-outline-primary mb-2 mb-md-0"
-                  >
-                    Tornar
-                  </button>
-                  <button
-                    type="submit"
-                    id="signup"
-                    class="btn btn-default ml-md-3"
-                  >
-                    Enviar
-                  </button>
-                </div>
-              </div>
-            </form>
+          <div class="floating-chip top">
+            <span class="chip-dot"></span>
+            Marketplace + Reparació
           </div>
+          <div class="floating-chip bottom">
+            <span class="chip-dot"></span>
+            Login, registre i dashboard
+          </div>
+        </div>
+      </div>
+    </section>
 
-          <div id="itemsPanel" class="d-none">
-            <div id="itemsForm">
-              <form id="itemsFormElement" novalidate>
-                <h2 class="h4 mb-4">Crear o editar element</h2>
+    <section class="section" id="projecte">
+      <div class="shell">
+        <div class="section-header">
+          <span class="eyebrow">El projecte</span>
+          <h2 class="section-title">Una plataforma que converteix la “caducitat” en oportunitat.</h2>
+          <p class="section-text">
+            SecondByte funciona com un hub de components i guies de reparació on el valor real d'una peça importa més que la moda del mercat. Economia circular, estalvi i funcionalitat. Un concepte bastant més útil que comprar ferralla nova per postureo.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <article class="glass-card">
+            <div class="card-inner">
+              <h3 class="card-title">Finalitat</h3>
+              <p class="card-text">
+                La plataforma permet publicar components, consultar documentació tècnica en PDF i gestionar dades a Firestore per construir un marketplace útil i escalable.
+              </p>
+            </div>
+          </article>
+
+          <article class="glass-card">
+            <div class="card-inner">
+              <h3 class="card-title">Target objectiu</h3>
+              <p class="card-text">
+                Està pensat per a una generació jove i conscient que vol maximitzar rendiment, estalviar diners i reduir residus sense renunciar a una experiència digital potent.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="funcionalitats">
+      <div class="shell">
+        <div class="section-header">
+          <span class="eyebrow">Funcionalitats</span>
+          <h2 class="section-title">Quatre blocs perquè el producte tingui sentit de veritat.</h2>
+          <p class="section-text">
+            He mantenido la lógica del proyecto y la he vestido como una plataforma seria. Qué detalle revolucionario en desarrollo web.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-body">
+              <div class="feature-icon">♻️</div>
+              <h3 class="feature-title">Marketplace d'intercanvi i compravenda</h3>
+              <p class="feature-text">Publicar components, negociar preus o proposar intercanvis per actualitzar el setup sense una inversió absurda.</p>
+              <span class="feature-tag">Compra · Venda · Truc</span>
+            </div>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-body">
+              <div class="feature-icon">✅</div>
+              <h3 class="feature-title">Certificació de vida útil</h3>
+              <p class="feature-text">Un protocol per categoritzar l'estat real del component segons l'ús recomanat: gaming, ofimàtica o servidor domèstic.</p>
+              <span class="feature-tag">Verificació tècnica</span>
+            </div>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-body">
+              <div class="feature-icon">🧩</div>
+              <h3 class="feature-title">Compatibilitat i upgrades</h3>
+              <p class="feature-text">Una calculadora per evitar compres errònies i facilitar muntatges DIY amb peces de segona mà que encara tenen sentit.</p>
+              <span class="feature-tag">Compatibilitat</span>
+            </div>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-body">
+              <div class="feature-icon">⭐</div>
+              <h3 class="feature-title">Valoració social</h3>
+              <p class="feature-text">Una comunitat basada en reputació per valorar intercanvis, compartir experiència i reforçar confiança entre usuaris.</p>
+              <span class="feature-tag">Comunitat</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="marketplace">
+      <div class="shell info-grid">
+        <article class="highlight-card">
+          <div class="highlight-body">
+            <span class="eyebrow">Arquitectura i estil</span>
+            <h3 class="highlight-title">Disseny alineat amb el que explica el projecte</h3>
+            <p class="highlight-text">
+              Rosa vibrant, blau elèctric, formes arrodonides i mode fosc. No és decoració gratuïta. És coherència visual amb el logo, millor llegibilitat i una base clara per a l'app real.
+            </p>
+
+            <div class="kpi-row">
+              <div class="kpi-box">
+                <span class="kpi-value">WebP</span>
+                <span class="kpi-text">Imatges optimitzades per reduir pes i càrrega.</span>
+              </div>
+              <div class="kpi-box">
+                <span class="kpi-value">Firebase</span>
+                <span class="kpi-text">Auth i Firestore a punt per moure dades reals.</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <aside class="team-card">
+          <div class="team-body">
+            <h3 class="team-title">Equip del producte</h3>
+            <ul class="team-list">
+              <li>
+                <span class="list-icon">👤</span>
+                <div><strong>Hugo</strong><br />Admin</div>
+              </li>
+              <li>
+                <span class="list-icon">🎨</span>
+                <div><strong>Oriol</strong><br />Frontend</div>
+              </li>
+              <li>
+                <span class="list-icon">⚙️</span>
+                <div><strong>Fernando</strong><br />Backend</div>
+              </li>
+              <li>
+                <span class="list-icon">📌</span>
+                <div><strong>Anastasia</strong><br />Product Manager</div>
+              </li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section auth-section" id="portal">
+      <div class="shell auth-shell">
+        <div class="section-header auth-intro">
+          <span class="eyebrow">Portal de gestió</span>
+          <h2 class="section-title">Login, registre i panell d'items integrats dins la landing.</h2>
+          <p class="section-text">
+            He integrat el flux d'autenticació i el CRUD d'items dins la mateixa pàgina perquè segueixi sent one-page però sense perdre la funcionalitat real que tenies muntada amb Firebase.
+          </p>
+        </div>
+
+        <section id="topBar" class="d-none auth-topbar mb-4">
+          <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+            <div class="mb-3 mb-md-0">
+              <h2 class="h5 mb-1">Panell de gestió</h2>
+              <p id="authStatus" class="mb-0 text-muted"></p>
+            </div>
+            <button type="button" id="logout" class="btn btn-outline-primary">
+              Tancar sessió
+            </button>
+          </div>
+        </section>
+
+        <div class="auth-grid">
+          <aside class="process-card auth-side-card">
+            <div class="process-body">
+              <span class="eyebrow">Flux</span>
+              <h3 class="process-title">Com ha de funcionar</h3>
+              <ul class="process-list">
+                <li>
+                  <span class="list-icon">1</span>
+                  <div><strong>Entrar o registrar-se</strong><br />Autenticació via Firebase Auth amb feedback visual immediat.</div>
+                </li>
+                <li>
+                  <span class="list-icon">2</span>
+                  <div><strong>Gestionar items</strong><br />Crear, editar o netejar elements guardats a Firestore.</div>
+                </li>
+                <li>
+                  <span class="list-icon">3</span>
+                  <div><strong>Escalar després</strong><br />Això ja queda preparat per marketplace real i guies associades.</div>
+                </li>
+              </ul>
+            </div>
+          </aside>
+
+          <div class="auth-main">
+            <div id="loginForm" class="auth-card">
+              <form id="loginFormElement" novalidate>
+                <h2 class="auth-title">Iniciar sessió</h2>
 
                 <div class="form-group row">
-                  <label for="title" class="col-md-4 col-form-label">
-                    Títol:
+                  <label for="loginEmail" class="col-md-4 col-form-label">
+                    Correu electrònic:
                   </label>
                   <div class="col-md-8">
                     <input
-                      type="text"
+                      type="email"
                       class="form-control"
-                      id="title"
-                      placeholder="Escriu un títol"
-                      maxlength="100"
+                      id="loginEmail"
+                      placeholder="Introdueix el teu correu"
+                      autocomplete="email"
                       required
                     />
                   </div>
                 </div>
 
                 <div class="form-group row">
-                  <label for="content" class="col-md-4 col-form-label">
-                    Contingut:
+                  <label for="loginPassword" class="col-md-4 col-form-label">
+                    Contrasenya:
                   </label>
                   <div class="col-md-8">
-                    <textarea
+                    <input
+                      type="password"
                       class="form-control"
-                      id="content"
-                      rows="4"
-                      placeholder="Escriu el contingut de l'element"
+                      id="loginPassword"
+                      placeholder="Introdueix la teva contrasenya"
+                      autocomplete="current-password"
                       required
-                    ></textarea>
+                    />
                   </div>
                 </div>
 
                 <div class="form-group row mb-0">
                   <div class="offset-md-4 col-md-8 d-flex flex-column flex-md-row justify-content-md-end">
-                    <button
-                      type="button"
-                      id="clearItem"
-                      class="btn btn-outline-primary mb-2 mb-md-0"
-                    >
-                      Netejar
+                    <button type="button" id="newUser" class="btn btn-outline-primary mb-2 mb-md-0">
+                      Registrar un nou usuari
                     </button>
-                    <button
-                      type="submit"
-                      id="save"
-                      class="btn btn-default ml-md-3"
-                    >
-                      Guardar
+                    <button type="submit" id="login" class="btn btn-default ml-md-3">
+                      Entrar
                     </button>
                   </div>
                 </div>
-
-                <input type="hidden" id="elementId" />
               </form>
             </div>
 
-            <div id="emptyState" class="text-center mt-4 d-none">
-              <p class="mb-0">Encara no hi ha cap element creat.</p>
+            <div id="signupForm" class="auth-card d-none">
+              <form id="signupFormElement" novalidate>
+                <h2 class="auth-title">Crear compte</h2>
+
+                <div class="form-group row">
+                  <label for="signupEmail" class="col-md-4 col-form-label">
+                    Correu electrònic:
+                  </label>
+                  <div class="col-md-8">
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="signupEmail"
+                      placeholder="Introdueix el teu correu"
+                      autocomplete="email"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="signupPassword" class="col-md-4 col-form-label">
+                    Contrasenya:
+                  </label>
+                  <div class="col-md-8">
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="signupPassword"
+                      placeholder="Mínim 8 caràcters"
+                      autocomplete="new-password"
+                      minlength="8"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="signupPasswordConfirm" class="col-md-4 col-form-label">
+                    Confirmar contrasenya:
+                  </label>
+                  <div class="col-md-8">
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="signupPasswordConfirm"
+                      placeholder="Repeteix la contrasenya"
+                      autocomplete="new-password"
+                      minlength="8"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row mb-0">
+                  <div class="offset-md-4 col-md-8 d-flex flex-column flex-md-row justify-content-md-end">
+                    <button type="button" id="backToLogin" class="btn btn-outline-primary mb-2 mb-md-0">
+                      Tornar
+                    </button>
+                    <button type="submit" id="signup" class="btn btn-default ml-md-3">
+                      Enviar
+                    </button>
+                  </div>
+                </div>
+              </form>
             </div>
 
-            <div class="table-responsive mt-4">
-              <table
-                class="table table-hover d-none"
-                id="listItems"
-                aria-live="polite"
-              ></table>
+            <div id="itemsPanel" class="auth-panel d-none">
+              <div id="itemsForm" class="auth-card">
+                <form id="itemsFormElement" novalidate>
+                  <h2 class="auth-title">Crear o editar element</h2>
+
+                  <div class="form-group row">
+                    <label for="title" class="col-md-4 col-form-label">
+                      Títol:
+                    </label>
+                    <div class="col-md-8">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="title"
+                        placeholder="Escriu un títol"
+                        maxlength="100"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="content" class="col-md-4 col-form-label">
+                      Contingut:
+                    </label>
+                    <div class="col-md-8">
+                      <textarea
+                        class="form-control"
+                        id="content"
+                        rows="4"
+                        placeholder="Escriu el contingut de l'element"
+                        required
+                      ></textarea>
+                    </div>
+                  </div>
+
+                  <div class="form-group row mb-0">
+                    <div class="offset-md-4 col-md-8 d-flex flex-column flex-md-row justify-content-md-end">
+                      <button type="button" id="clearItem" class="btn btn-outline-primary mb-2 mb-md-0">
+                        Netejar
+                      </button>
+                      <button type="submit" id="save" class="btn btn-default ml-md-3">
+                        Guardar
+                      </button>
+                    </div>
+                  </div>
+
+                  <input type="hidden" id="elementId" />
+                </form>
+              </div>
+
+              <div id="emptyState" class="empty-state text-center mt-4 d-none">
+                <p class="mb-0">Encara no hi ha cap element creat.</p>
+              </div>
+
+              <div class="table-shell mt-4">
+                <div class="table-responsive">
+                  <table class="table table-hover d-none" id="listItems" aria-live="polite"></table>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
+  </main>
 
-    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <div class="footer-brand">
+        <img class="brand-mark" src="Logo Favicon_redondo.png" alt="Isotip de SecondByte" />
+        <div class="footer-copy">
+          <strong>SecondByte</strong><br />
+          Repair &amp; Exchange Hub
+        </div>
+      </div>
 
-    <script src="js/config.js"></script>
-    <script src="js/firestore.js"></script>
-    <script src="js/items.js"></script>
+      <div class="footer-copy">
+        Economia circular tecnològica · support@secondbyte.cat
+      </div>
+    </div>
+  </footer>
 
-    <script>
-      function showAlert(text, type) {
-        const alertEl = document.getElementById("alert");
-        alertEl.innerText = text;
-        alertEl.className = `alert ${type}`;
-        alertEl.style.display = "block";
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
 
-        setTimeout(() => {
-          alertEl.style.display = "none";
-        }, 2500);
+  <script src="js/config.js"></script>
+  <script src="js/firestore.js"></script>
+  <script src="js/items.js"></script>
+
+  <script>
+    function showAlert(text, type) {
+      const alertEl = document.getElementById("alert");
+      alertEl.innerText = text;
+      alertEl.className = `alert ${type}`;
+      alertEl.style.display = "block";
+
+      setTimeout(() => {
+        alertEl.style.display = "none";
+      }, 2500);
+    }
+
+    function getFirebaseErrorMessage(error) {
+      if (!error || !error.code) {
+        return "S'ha produït un error inesperat";
       }
 
-      function getFirebaseErrorMessage(error) {
-        if (!error || !error.code) {
-          return "S'ha produït un error inesperat";
+      switch (error.code) {
+        case "auth/invalid-email":
+          return "El correu electrònic no és vàlid";
+        case "auth/user-disabled":
+          return "Aquest compte està desactivat";
+        case "auth/user-not-found":
+          return "No existeix cap usuari amb aquest correu";
+        case "auth/wrong-password":
+          return "La contrasenya no és correcta";
+        case "auth/email-already-in-use":
+          return "Aquest correu ja està registrat";
+        case "auth/weak-password":
+          return "La contrasenya és massa feble";
+        default:
+          return "S'ha produït un error: " + error.message;
+      }
+    }
+
+    function showLogin() {
+      document.getElementById("loginForm").classList.remove("d-none");
+      document.getElementById("signupForm").classList.add("d-none");
+      document.getElementById("itemsPanel").classList.add("d-none");
+      document.getElementById("topBar").classList.add("d-none");
+      document.getElementById("listItems").classList.add("d-none");
+    }
+
+    function showSignup() {
+      document.getElementById("loginForm").classList.add("d-none");
+      document.getElementById("signupForm").classList.remove("d-none");
+      document.getElementById("itemsPanel").classList.add("d-none");
+      document.getElementById("topBar").classList.add("d-none");
+      document.getElementById("listItems").classList.add("d-none");
+    }
+
+    function showItems(user) {
+      document.getElementById("loginForm").classList.add("d-none");
+      document.getElementById("signupForm").classList.add("d-none");
+      document.getElementById("itemsPanel").classList.remove("d-none");
+      document.getElementById("topBar").classList.remove("d-none");
+      document.getElementById("listItems").classList.remove("d-none");
+      document.getElementById("authStatus").innerText = `Sessió iniciada com ${user.email}`;
+    }
+
+    function clearItemForm() {
+      document.getElementById("elementId").value = "";
+      document.getElementById("title").value = "";
+      document.getElementById("content").value = "";
+    }
+
+    async function refreshItemsView() {
+      await loadItems();
+
+      const table = document.getElementById("listItems");
+      const emptyState = document.getElementById("emptyState");
+
+      if (table.innerHTML.trim() === "") {
+        emptyState.classList.remove("d-none");
+        table.classList.add("d-none");
+      } else {
+        emptyState.classList.add("d-none");
+        table.classList.remove("d-none");
+      }
+    }
+
+    document.getElementById("newUser").addEventListener("click", () => {
+      showSignup();
+    });
+
+    document.getElementById("backToLogin").addEventListener("click", () => {
+      showLogin();
+    });
+
+    document.getElementById("clearItem").addEventListener("click", () => {
+      clearItemForm();
+    });
+
+    document.getElementById("logout").addEventListener("click", async () => {
+      try {
+        await auth.signOut();
+        showAlert("Sessió tancada correctament", "alert-success");
+      } catch (error) {
+        showAlert(getFirebaseErrorMessage(error), "alert-danger");
+      }
+    });
+
+    document
+      .getElementById("loginFormElement")
+      .addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const email = document.getElementById("loginEmail").value.trim();
+        const password = document.getElementById("loginPassword").value;
+
+        if (!email) {
+          showAlert("El correu electrònic és obligatori", "alert-danger");
+          return;
         }
 
-        switch (error.code) {
-          case "auth/invalid-email":
-            return "El correu electrònic no és vàlid";
-          case "auth/user-disabled":
-            return "Aquest compte està desactivat";
-          case "auth/user-not-found":
-            return "No existeix cap usuari amb aquest correu";
-          case "auth/wrong-password":
-            return "La contrasenya no és correcta";
-          case "auth/email-already-in-use":
-            return "Aquest correu ja està registrat";
-          case "auth/weak-password":
-            return "La contrasenya és massa feble";
-          default:
-            return "S'ha produït un error: " + error.message;
+        if (!password) {
+          showAlert("La contrasenya és obligatòria", "alert-danger");
+          return;
         }
-      }
 
-      function showLogin() {
-        document.getElementById("loginForm").classList.remove("d-none");
-        document.getElementById("signupForm").classList.add("d-none");
-        document.getElementById("itemsPanel").classList.add("d-none");
-        document.getElementById("topBar").classList.add("d-none");
-        document.getElementById("listItems").classList.add("d-none");
-      }
-
-      function showSignup() {
-        document.getElementById("loginForm").classList.add("d-none");
-        document.getElementById("signupForm").classList.remove("d-none");
-        document.getElementById("itemsPanel").classList.add("d-none");
-        document.getElementById("topBar").classList.add("d-none");
-        document.getElementById("listItems").classList.add("d-none");
-      }
-
-      function showItems(user) {
-        document.getElementById("loginForm").classList.add("d-none");
-        document.getElementById("signupForm").classList.add("d-none");
-        document.getElementById("itemsPanel").classList.remove("d-none");
-        document.getElementById("topBar").classList.remove("d-none");
-        document.getElementById("listItems").classList.remove("d-none");
-        document.getElementById("authStatus").innerText = `Sessió iniciada com ${user.email}`;
-      }
-
-      function clearItemForm() {
-        document.getElementById("elementId").value = "";
-        document.getElementById("title").value = "";
-        document.getElementById("content").value = "";
-      }
-
-      async function refreshItemsView() {
-        await loadItems();
-
-        const table = document.getElementById("listItems");
-        const emptyState = document.getElementById("emptyState");
-
-        if (table.innerHTML.trim() === "") {
-          emptyState.classList.remove("d-none");
-          table.classList.add("d-none");
-        } else {
-          emptyState.classList.add("d-none");
-          table.classList.remove("d-none");
-        }
-      }
-
-      document.getElementById("newUser").addEventListener("click", () => {
-        showSignup();
-      });
-
-      document.getElementById("backToLogin").addEventListener("click", () => {
-        showLogin();
-      });
-
-      document.getElementById("clearItem").addEventListener("click", () => {
-        clearItemForm();
-      });
-
-      document.getElementById("logout").addEventListener("click", async () => {
         try {
-          await auth.signOut();
-          showAlert("Sessió tancada correctament", "alert-success");
+          await auth.signInWithEmailAndPassword(email, password);
+          showAlert("Usuari autenticat correctament", "alert-success");
         } catch (error) {
           showAlert(getFirebaseErrorMessage(error), "alert-danger");
         }
       });
 
-      document
-        .getElementById("loginFormElement")
-        .addEventListener("submit", async (event) => {
-          event.preventDefault();
+    document
+      .getElementById("signupFormElement")
+      .addEventListener("submit", async (event) => {
+        event.preventDefault();
 
-          const email = document.getElementById("loginEmail").value.trim();
-          const password = document.getElementById("loginPassword").value;
+        const email = document.getElementById("signupEmail").value.trim();
+        const password = document.getElementById("signupPassword").value;
+        const passwordConfirm = document.getElementById("signupPasswordConfirm").value;
 
-          if (!email) {
-            showAlert("El correu electrònic és obligatori", "alert-danger");
-            return;
-          }
+        if (!email || email.indexOf("@") < 1) {
+          showAlert("Email incorrecte", "alert-danger");
+          return;
+        }
 
-          if (!password) {
-            showAlert("La contrasenya és obligatòria", "alert-danger");
-            return;
-          }
+        if (!password) {
+          showAlert("La contrasenya és obligatòria", "alert-danger");
+          return;
+        }
 
-          try {
-            await auth.signInWithEmailAndPassword(email, password);
-            showAlert("Usuari autenticat correctament", "alert-success");
-          } catch (error) {
-            showAlert(getFirebaseErrorMessage(error), "alert-danger");
-          }
-        });
+        if (password.length < 8) {
+          showAlert(
+            "La contrasenya ha de tenir una longitud mínima de 8 caràcters",
+            "alert-danger"
+          );
+          return;
+        }
 
-      document
-        .getElementById("signupFormElement")
-        .addEventListener("submit", async (event) => {
-          event.preventDefault();
+        if (password !== passwordConfirm) {
+          showAlert("Les contrasenyes no coincideixen", "alert-danger");
+          return;
+        }
 
-          const email = document.getElementById("signupEmail").value.trim();
-          const password = document.getElementById("signupPassword").value;
-          const passwordConfirm = document.getElementById("signupPasswordConfirm").value;
+        try {
+          await auth.createUserWithEmailAndPassword(email, password);
 
-          if (!email || email.indexOf("@") < 1) {
-            showAlert("Email incorrecte", "alert-danger");
-            return;
-          }
-
-          if (!password) {
-            showAlert("La contrasenya és obligatòria", "alert-danger");
-            return;
-          }
-
-          if (password.length < 8) {
-            showAlert(
-              "La contrasenya ha de tenir una longitud mínima de 8 caràcters",
-              "alert-danger"
-            );
-            return;
-          }
-
-          if (password !== passwordConfirm) {
-            showAlert("Les contrasenyes no coincideixen", "alert-danger");
-            return;
-          }
-
-          try {
-            await auth.createUserWithEmailAndPassword(email, password);
-
-            showAlert("Usuari creat correctament", "alert-success");
-            document.getElementById("signupFormElement").reset();
-            showLogin();
-          } catch (error) {
-            showAlert(getFirebaseErrorMessage(error), "alert-danger");
-          }
-        });
-
-      document
-        .getElementById("itemsFormElement")
-        .addEventListener("submit", async (event) => {
-          event.preventDefault();
-
-          const id = document.getElementById("elementId").value;
-          const title = document.getElementById("title").value.trim();
-          const content = document.getElementById("content").value.trim();
-
-          if (!title) {
-            showAlert("El títol és obligatori", "alert-danger");
-            return;
-          }
-
-          if (!content) {
-            showAlert("El contingut és obligatori", "alert-danger");
-            return;
-          }
-
-          const doc = { title, content };
-
-          try {
-            if (!id) {
-              await addItem(doc);
-              showAlert("Element creat correctament", "alert-success");
-            } else {
-              await updateItem(id, doc);
-              showAlert("Element actualitzat correctament", "alert-success");
-            }
-
-            clearItemForm();
-            await refreshItemsView();
-          } catch (error) {
-            showAlert("No s'ha pogut guardar l'element", "alert-danger");
-          }
-        });
-
-      auth.onAuthStateChanged(async (user) => {
-        if (user) {
-          showItems(user);
-          await refreshItemsView();
-        } else {
-          clearItemForm();
+          showAlert("Usuari creat correctament", "alert-success");
+          document.getElementById("signupFormElement").reset();
           showLogin();
+        } catch (error) {
+          showAlert(getFirebaseErrorMessage(error), "alert-danger");
         }
       });
-    </script>
-  </body>
+
+    document
+      .getElementById("itemsFormElement")
+      .addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const id = document.getElementById("elementId").value;
+        const title = document.getElementById("title").value.trim();
+        const content = document.getElementById("content").value.trim();
+
+        if (!title) {
+          showAlert("El títol és obligatori", "alert-danger");
+          return;
+        }
+
+        if (!content) {
+          showAlert("El contingut és obligatori", "alert-danger");
+          return;
+        }
+
+        const doc = { title, content };
+
+        try {
+          if (!id) {
+            await addItem(doc);
+            showAlert("Element creat correctament", "alert-success");
+          } else {
+            await updateItem(id, doc);
+            showAlert("Element actualitzat correctament", "alert-success");
+          }
+
+          clearItemForm();
+          await refreshItemsView();
+        } catch (error) {
+          showAlert("No s'ha pogut guardar l'element", "alert-danger");
+        }
+      });
+
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        showItems(user);
+        await refreshItemsView();
+      } else {
+        clearItemForm();
+        showLogin();
+      }
+    });
+  </script>
+</body>
 </html>
