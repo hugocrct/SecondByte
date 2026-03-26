@@ -7,12 +7,12 @@ firebase.initializeApp({
     appId: "1:707492674406:web:e9255b69b12808bf3ae6a7"
 });
 
-const auth    = firebase.auth();
-const db      = firebase.firestore();
-const storage = firebase.storage();
+const auth         = firebase.auth();
+const db           = firebase.firestore();
+const storage      = firebase.storage();
 
-// Única declaración global de colecciones
-const items       = db.collection("items");
-const users       = db.collection("usuaris");
-const components  = db.collection("components");
-const guias       = db.collection("guias");
+// Referencias Globales
+const users        = db.collection("usuaris");
+const components   = db.collection("components");
+const guias        = db.collection("guias");
+const transaccions = db.collection("transaccions");

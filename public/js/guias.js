@@ -1,50 +1,30 @@
-
-
-/**
- * Añade una nueva guía de montaje.
- * Usa la constante 'guias' definida globalmente en config.js
- */
 async function addGuia(formData) {
     try {
         const user = auth.currentUser;
-        if (!user) throw new Error("No hay ningún usuario logueado.");
+        if (!user) throw new Error("Debes estar logueado para subir guías.");
 
         const newGuia = {
-            nom: formData.nom,               // Título descriptivo
-            id_Component: formData.id_Component, // ID del componente relacionado
-            ubicacio_PDF: formData.ubicacio_PDF, // URL o ruta del archivo
-            idAutor: user.uid,               // ID del creador
+            nom: formData.nom,
+            id_Component: formData.id_Component,
+            ubicacio_PDF: formData.ubicacio_PDF,
+            idAutor: user.uid,
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         };
 
         await guias.add(newGuia);
-        showAlert("Guía publicada correctamente!", "alert-success");
-        
-    } catch (error) {
-        console.error("Error en addGuia:", error);
-        showAlert("Error: " + error.message, "alert-danger");
-    }
+        showAlert("Guía vinculada!", "alert-success");
+    } catch (error) { showAlert("Error: " + error.message, "alert-danger"); }
 }
-/**
- * Carrega i mostra les guies en una taula (opcional).
- */
+
 async function loadGuias() {
     const tableGuias = document.getElementById("listGuias");
-    tableGuias.innerHTML = "<tr><th>Títol Guia</th><th>PDF</th><th>Autor</th></tr>";
-
+    if(!tableGuias) return;
+    tableGuias.innerHTML = "<tr><th>Títol Guia</th><th>PDF</th></tr>";
     try {
         const snapshot = await guias.orderBy("timestamp", "desc").get();
         snapshot.forEach(doc => {
             const data = doc.data();
-            tableGuias.innerHTML += `
-                <tr>
-                    <td>${data.nom}</td>
-                    <td><a href="${data.ubicacio_PDF}" target="_blank">Veure PDF</a></td>
-                    <td>${data.idAutor}</td>
-                </tr>
-            `;
+            tableGuias.innerHTML += `<tr><td>${data.nom}</td><td><a href="${data.ubicacio_PDF}" target="_blank">PDF</a></td></tr>`;
         });
-    } catch (error) {
-        console.error("Error carregant guies:", error);
-    }
+    } catch (error) { console.error(error); }
 }

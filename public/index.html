@@ -2,7 +2,7 @@
 <html lang="ca">
 <head>
   <meta charset="utf-8" />
-  <title>Gestió SecondByte - Automàtic</title>
+  <title>SecondByte - Sistema de Gestió Integral</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" />
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   
@@ -11,70 +11,135 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
 </head>
-<body>
-  <div class="container p-5">
+<body class="bg-light">
+
+  <div class="container py-5">
     <div id="alert" class="alert" style="display:none;" role="alert"></div>
 
-    <div id="loginForm">...</div> 
+    <div class="col-md-6 offset-md-3" id="loginForm">
+      <div class="card shadow-sm p-4">
+        <h3 class="text-center">Iniciar Sessió</h3>
+        <hr>
+        <input type="email" class="form-control mb-2" id="loginEmail" placeholder="Correu electrònic" />
+        <input type="password" class="form-control mb-2" id="loginPassword" placeholder="Contrasenya" />
+        <button type="button" id="login" class="btn btn-primary btn-block">Entrar</button>
+        <button type="button" id="newUser" class="btn btn-link btn-block">No tens compte? Registra't</button>
+      </div>
+    </div>
 
-    <div class="col-12" id="appContent" style="display: none">
+    <div class="col-md-6 offset-md-3" id="signupForm" style="display: none">
+      <div class="card shadow-sm p-4">
+        <h3>Crear nou compte</h3>
+        <hr>
+        <input type="email" class="form-control mb-2" id="signupEmail" placeholder="Email" />
+        <input type="password" class="form-control mb-2" id="signupPassword" placeholder="Contrasenya" />
+        <input type="password" class="form-control mb-2" id="signupPasswordConfirm" placeholder="Confirmar Contrasenya" />
+        <input type="text" class="form-control mb-2" id="signupNom" placeholder="Nom" />
+        <input type="text" class="form-control mb-2" id="signupCognom" placeholder="Cognom" />
+        <input type="tel" class="form-control mb-2" id="signupTelefon" placeholder="Telèfon" />
+        <input type="text" class="form-control mb-2" id="signupProvincia" placeholder="Província" />
+        <button type="button" id="signup" class="btn btn-success btn-block">Registrar-se</button>
+        <button type="button" id="backToLogin" class="btn btn-link btn-block">Tornar al login</button>
+      </div>
+    </div>
+
+    <div id="appContent" style="display: none">
+      
       <div class="row">
-        
-        <div class="col-md-6">
-          <div class="card p-3 mb-3 bg-light shadow-sm">
+        <div class="col-md-6 mb-4">
+          <div class="card p-3 shadow-sm h-100">
             <h4>📦 Nou Component</h4>
-            <form id="formNewComponent">
-              <input type="text" class="form-control mb-2" id="compNom" placeholder="Nom del component" required />
+            <form id="formComponent">
+              <input type="text" class="form-control mb-2" id="compNom" placeholder="Nom del producte" />
               <select class="form-control mb-2" id="compCategoria">
                 <option value="CPU">CPU</option>
                 <option value="GPU">GPU</option>
                 <option value="RAM">RAM</option>
                 <option value="Placa Base">Placa Base</option>
-                <option value="PSU">PSU</option>
               </select>
-              <input type="number" class="form-control mb-2" id="compPreu" placeholder="Preu (€)" />
-              <input type="file" class="form-control-file mb-2" id="compImages" multiple accept="image/*" />
-              <button type="button" id="btnSaveComponent" class="btn btn-success btn-block">Publicar Component</button>
+              <input type="number" class="form-control mb-2" id="compPreu" placeholder="Preu base (€)" />
+              <button type="button" id="btnSaveComponent" class="btn btn-success btn-block">Publicar Producte</button>
             </form>
           </div>
         </div>
 
-        <div class="col-md-6">
-          <div class="card p-3 mb-3 border-primary shadow-sm">
+        <div class="col-md-6 mb-4">
+          <div class="card p-3 shadow-sm h-100 border-primary">
             <h4>📖 Nova Guia de Muntatge</h4>
-            <form id="formNewGuia">
-              <input type="text" class="form-control mb-2" id="guiaNom" placeholder="Títol de la guia" required />
-              
-              <label><small>1. Selecciona la Categoria:</small></label>
-              <select class="form-control mb-2" id="guiaFiltreCategoria" onchange="updateComponentDropdown(this.value)">
-                <option value="">-- Tria una categoria --</option>
-                <option value="CPU">CPU</option>
-                <option value="GPU">GPU</option>
-                <option value="RAM">RAM</option>
-                <option value="Placa Base">Placa Base</option>
-                <option value="PSU">PSU</option>
-              </select>
+            <input type="text" class="form-control mb-2" id="guiaNom" placeholder="Títol de la guia" />
+            
+            <label class="small mb-0 text-muted">Filtrar per Categoria:</label>
+            <select class="form-control mb-2" id="guiaFiltre" onchange="updateComponentDropdown(this.value)">
+              <option value="">-- Tria Categoria --</option>
+              <option value="CPU">CPU</option>
+              <option value="GPU">GPU</option>
+              <option value="RAM">RAM</option>
+              <option value="Placa Base">Placa Base</option>
+            </select>
 
-              <label><small>2. Selecciona el Producte:</small></label>
-              <select class="form-control mb-2" id="guiaIdComp" disabled>
-                <option value="">Primer tria una categoria...</option>
-              </select>
+            <label class="small mb-0 text-muted">Seleccionar Producte (FK):</label>
+            <select class="form-control mb-2" id="guiaIdComp" disabled>
+              <option value="">Primer tria categoria...</option>
+            </select>
 
-              <input type="text" class="form-control mb-2" id="guiaPDF" placeholder="URL del manual PDF" required />
-              <button type="button" id="btnSaveGuia" class="btn btn-primary btn-block">Publicar Guia</button>
+            <input type="text" class="form-control mb-2" id="guiaPDF" placeholder="URL del manual PDF" />
+            <button type="button" id="btnSaveGuia" class="btn btn-primary btn-block">Vincular Guia</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="card p-4 shadow-sm border-warning">
+            <h4>💸 Nova Transacció (Compra / Intercanvi)</h4>
+            <hr>
+            <form id="formTransaccio">
+              <div class="row">
+                <div class="col-md-4">
+                  <label class="small">Producte (FK):</label>
+                  <select id="transProducte" class="form-control mb-2"></select>
+                </div>
+                <div class="col-md-4">
+                  <label class="small">Venedor (FK):</label>
+                  <select id="transVenedor" class="form-control mb-2"></select>
+                </div>
+                <div class="col-md-4">
+                  <label class="small">Comprador (FK):</label>
+                  <select id="transComprador" class="form-control mb-2"></select>
+                </div>
+              </div>
+              <div class="row mt-2">
+                <div class="col-md-4">
+                  <label class="small">Tipus:</label>
+                  <select id="transTipus" class="form-control" onchange="togglePreuUI(this.value)">
+                    <option value="true">Compra (Efectiu)</option>
+                    <option value="false">Intercanvi</option>
+                  </select>
+                </div>
+                <div class="col-md-4" id="divPreu">
+                  <label class="small">Preu Final (€):</label>
+                  <input type="number" id="transPreu" class="form-control" value="0">
+                </div>
+                <div class="col-md-4 align-self-end">
+                  <button type="button" id="btnSaveTransaccio" class="btn btn-warning btn-block font-weight-bold">Registrar Transacció</button>
+                </div>
+              </div>
             </form>
           </div>
         </div>
       </div>
 
-      <div class="text-center my-4">
-        <button class="btn btn-secondary mx-1" onclick="loadUsers()">Usuaris</button>
-        <button class="btn btn-info mx-1" onclick="loadGuias()">Guies</button>
-        <button id="logout" class="btn btn-outline-danger mx-1">Sortir</button>
+      <div class="text-center py-3">
+        <button class="btn btn-outline-secondary mx-1" onclick="loadUsers()">Veure Usuaris</button>
+        <button class="btn btn-outline-info mx-1" onclick="loadGuias()">Veure Guies</button>
+        <button id="logout" class="btn btn-danger mx-1">Tancar Sessió</button>
       </div>
 
-      <table class="table table-striped" id="listUsers"></table>
-      <table class="table table-striped" id="listGuias"></table>
+      <div class="mt-4 bg-white p-3 rounded shadow-sm">
+        <table class="table table-hover" id="listUsers"></table>
+        <table class="table table-hover" id="listGuias"></table>
+      </div>
+
     </div>
   </div>
 
@@ -83,72 +148,131 @@
   <script src="js/usuaris.js"></script>
   <script src="js/components.js"></script>
   <script src="js/guias.js"></script>
+  <script src="js/transaccions.js"></script>
 
   <script>
-    // --- LÒGICA DE FILTRATGE AUTOMÀTIC ---
-    async function updateComponentDropdown(categoria) {
-      const selectComp = document.getElementById("guiaIdComp");
-      selectComp.innerHTML = '<option value="">Carregant productes...</option>';
-      selectComp.disabled = true;
-
-      if (!categoria) {
-        selectComp.innerHTML = '<option value="">Primer tria una categoria...</option>';
-        return;
-      }
-
-      try {
-        // Busquem a la col·lecció 'components' aquells que coincideixin amb la categoria
-        const snapshot = await db.collection("components")
-                                 .where("categoria", "==", categoria)
-                                 .get();
-        
-        if (snapshot.empty) {
-          selectComp.innerHTML = '<option value="">No hi ha productes en aquesta categoria</option>';
-          return;
-        }
-
-        selectComp.innerHTML = '<option value="">-- Selecciona el producte --</option>';
-        snapshot.forEach(doc => {
-          const data = doc.data();
-          // El 'value' serà l'ID (Foreign Key) i el text serà el Nom del producte
-          selectComp.innerHTML += `<option value="${doc.id}">${data.nom}</option>`;
-        });
-        selectComp.disabled = false;
-
-      } catch (e) {
-        console.error("Error filtrant components:", e);
-        showAlert("Error al carregar productes", "alert-danger");
-      }
+    // --- UTILITATS UI ---
+    function showAlert(text, type) {
+      const el = document.getElementById("alert");
+      el.innerText = text; el.className = `alert ${type}`; el.style.display = "block";
+      setTimeout(() => el.style.display = "none", 4000);
     }
 
-    // --- RESTA DE LOGICA (Login, Salvar...) ---
-    
-    // Auth Listener
-    auth.onAuthStateChanged(user => {
-      if (user) document.getElementById("appContent").style.display = "block";
-      else document.getElementById("appContent").style.display = "none";
-    });
+    function togglePreuUI(isCompra) {
+      const p = document.getElementById("transPreu");
+      if(isCompra === "false") p.value = 0;
+      document.getElementById("divPreu").style.opacity = (isCompra === "true") ? "1" : "0.5";
+    }
 
-    // Guardar Guia
-    document.getElementById("btnSaveGuia").onclick = async () => {
-      const formData = {
-        nom: document.getElementById("guiaNom").value,
-        id_Component: document.getElementById("guiaIdComp").value, // Agafa l'ID del desplegable
-        ubicacio_PDF: document.getElementById("guiaPDF").value
+    // --- CARREGA DE DADES DINÀMIQUES (FK) ---
+    async function updateComponentDropdown(cat) {
+      const sel = document.getElementById("guiaIdComp");
+      if(!cat) { sel.disabled = true; return; }
+      const snap = await components.where("categoria", "==", cat).get();
+      sel.innerHTML = '<option value="">-- Selecciona --</option>';
+      snap.forEach(doc => sel.innerHTML += `<option value="${doc.id}">${doc.data().nom}</option>`);
+      sel.disabled = false;
+    }
+
+    async function cargarFKTransaccions() {
+      const sP = document.getElementById("transProducte");
+      const sV = document.getElementById("transVenedor");
+      const sC = document.getElementById("transComprador");
+
+      const snapP = await components.get();
+      sP.innerHTML = '<option value="">-- Tria Producte --</option>';
+      snapP.forEach(doc => sP.innerHTML += `<option value="${doc.id}">${doc.data().nom}</option>`);
+
+      const snapU = await users.get();
+      let optU = '<option value="">-- Tria Usuari --</option>';
+      snapU.forEach(doc => optU += `<option value="${doc.id}">${doc.data().nom} (${doc.data().email})</option>`);
+      sV.innerHTML = optU; sC.innerHTML = optU;
+    }
+
+    // --- LOGICA DE BOTONS ---
+    document.getElementById("btnSaveTransaccio").onclick = async () => {
+      const data = {
+        id_Producte: document.getElementById("transProducte").value,
+        id_Vendedor: document.getElementById("transVenedor").value,
+        id_Comprador: document.getElementById("transComprador").value,
+        tipus: document.getElementById("transTipus").value === "true",
+        preu: document.getElementById("transPreu").value
       };
 
-      if (!formData.id_Component) return showAlert("Has de seleccionar un producte", "alert-warning");
+      if(!data.id_Producte || !data.id_Vendedor || !data.id_Comprador) {
+        return showAlert("Falten camps per seleccionar", "alert-warning");
+      }
+
+      if(data.id_Vendedor === data.id_Comprador) {
+        return showAlert("No pots comprar-te a tu mateix!", "alert-danger");
+      }
 
       try {
-        await addGuia(formData);
-        document.getElementById("formNewGuia").reset();
-        document.getElementById("guiaIdComp").disabled = true;
-      } catch (e) { showAlert(e.message, "alert-danger"); }
+        await addTransaccio(data);
+        // NETEJA SI TOT VA BÉ
+        document.getElementById("formTransaccio").reset();
+        document.getElementById("divPreu").style.opacity = "1";
+      } catch (e) { /* Error ja gestionat a transaccions.js */ }
     };
 
-    // Funcions auxiliars (showAlert, logout...)
-    function showAlert(t, c) { /* ... mateixa que abans ... */ }
+    document.getElementById("btnSaveComponent").onclick = async () => {
+      const data = {
+        nom: document.getElementById("compNom").value,
+        categoria: document.getElementById("compCategoria").value,
+        preu: document.getElementById("compPreu").value
+      };
+      await addComponent(data);
+      document.getElementById("formComponent").reset();
+      cargarFKTransaccions(); // Recarregar llistes
+    };
+
+    document.getElementById("btnSaveGuia").onclick = async () => {
+      const data = {
+        nom: document.getElementById("guiaNom").value,
+        id_Component: document.getElementById("guiaIdComp").value,
+        ubicacio_PDF: document.getElementById("guiaPDF").value
+      };
+      await addGuia(data);
+    };
+
+    // --- AUTH FLOW ---
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        document.getElementById("loginForm").style.display = "none";
+        document.getElementById("signupForm").style.display = "none";
+        document.getElementById("appContent").style.display = "block";
+        cargarFKTransaccions();
+      } else {
+        document.getElementById("appContent").style.display = "none";
+        document.getElementById("loginForm").style.display = "block";
+      }
+    });
+
+    document.getElementById("login").onclick = async () => {
+      const e = document.getElementById("loginEmail").value;
+      const p = document.getElementById("loginPassword").value;
+      try { await auth.signInWithEmailAndPassword(e, p); } catch (err) { showAlert(err.message, "alert-danger"); }
+    };
+
+    document.getElementById("signup").onclick = async () => {
+      const e = document.getElementById("signupEmail").value;
+      const p = document.getElementById("signupPassword").value;
+      const extra = {
+        nom: document.getElementById("signupNom").value,
+        cognom: document.getElementById("signupCognom").value,
+        telefon: document.getElementById("signupTelefon").value,
+        provincia: document.getElementById("signupProvincia").value
+      };
+      try {
+        const cred = await auth.createUserWithEmailAndPassword(e, p);
+        await addUser(cred, extra);
+      } catch (err) { showAlert(err.message, "alert-danger"); }
+    };
+
     document.getElementById("logout").onclick = () => auth.signOut().then(() => location.reload());
+    document.getElementById("newUser").onclick = () => { document.getElementById("loginForm").style.display="none"; document.getElementById("signupForm").style.display="block"; };
+    document.getElementById("backToLogin").onclick = () => { document.getElementById("signupForm").style.display="none"; document.getElementById("loginForm").style.display="block"; };
+
   </script>
 </body>
 </html>
