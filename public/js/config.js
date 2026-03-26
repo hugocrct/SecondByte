@@ -1,3 +1,4 @@
+// Inicialització de Firebase
 firebase.initializeApp({
     apiKey: "AIzaSyCJAwDYwDnW_uX8KOSQuz7SIAGJscBc_QU",
     authDomain: "secondbyte33.firebaseapp.com",
@@ -7,4 +8,6 @@ firebase.initializeApp({
     appId: "1:707492674406:web:e9255b69b12808bf3ae6a7"
 });
 
+// Instàncies globals
 const auth = firebase.auth();
+const db   = firebase.firestore();
