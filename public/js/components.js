@@ -1,4 +1,4 @@
-const components = db.collection("components");
+
 
 // Diccionari de regles de compatibilitat automàtica
 const compatibilidadAutomatica = {

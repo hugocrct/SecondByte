@@ -1,4 +1,4 @@
-const users = db.collection("usuaris");
+
 
 /**
  * Registra un nou usuari a Firestore sense els camps 'punts' i 'rol'.

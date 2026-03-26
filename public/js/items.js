@@ -1,4 +1,4 @@
-const items = db.collection("items");
+
 
 async function addItem(doc) {
   try {
