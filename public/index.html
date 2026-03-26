@@ -1,121 +1,200 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8" />
-    <title>Gestió d'Items i Usuaris</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" />
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
+  <meta charset="utf-8" />
+  <title>Gestió d'Items i Usuaris</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" />
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 </head>
+
 <body>
-    <div class="container p-5">
+  <div class="container p-5">
+    <div class="row">
+      <div class="col-12">
+        <div id="alert" style="display:none;" role="alert"></div>
+      </div>
+
+      <div class="col-8 offset-2" id="loginForm">
+        <h3>Iniciar Sessió</h3>
+        <form>
+          <input type="email" class="form-control mb-2" id="loginEmail" placeholder="Email" />
+          <input type="password" class="form-control mb-2" id="loginPassword" placeholder="Contrasenya" />
+          <button type="button" id="login" class="btn btn-primary float-right">Entrar</button>
+          <button type="button" id="newUser" class="btn btn-link">Registrar-se</button>
+        </form>
+      </div>
+
+      <div class="col-8 offset-2" id="signupForm" style="display: none">
+        <h3>Nou Usuari</h3>
+        <form>
+          <input type="email" class="form-control mb-2" id="signupEmail" placeholder="Email" />
+          <input type="password" class="form-control mb-2" id="signupPassword" placeholder="Contrasenya" />
+          <input type="password" class="form-control mb-2" id="signupPasswordConfirm" placeholder="Confirmar" />
+          <input type="text" class="form-control mb-2" id="signupNom" placeholder="Nom" />
+          <input type="text" class="form-control mb-2" id="signupCognom" placeholder="Cognom" />
+          <input type="tel" class="form-control mb-2" id="signupTelefon" placeholder="Telèfon" />
+          <input type="text" class="form-control mb-2" id="signupProvincia" placeholder="Província" />
+          <button type="button" id="signup" class="btn btn-success float-right">Enviar</button>
+          <button type="button" id="backToLogin" class="btn btn-link">Tornar</button>
+        </form>
+      </div>
+
+      <div class="col-12" id="appContent" style="display: none">
         <div class="row">
-            <div class="col-12">
-                <div id="alert" style="display:none;" role="alert"></div>
+          <div class="col-md-4">
+            <div class="card p-3 mb-3">
+              <h4>Items Genèrics</h4>
+              <input type="text" class="form-control mb-2" id="title" placeholder="Títol" />
+              <input type="text" class="form-control mb-2" id="content" placeholder="Contingut" />
+              <input type="hidden" id="elementId" />
+              <button type="button" id="save" class="btn btn-info btn-block">Guardar Ítem</button>
             </div>
+          </div>
 
-            <div class="col-8 offset-2" id="loginForm">
-                <h3>Iniciar Sessió</h3>
-                <form>
-                    <input type="email" class="form-control mb-2" id="loginEmail" placeholder="Email" />
-                    <input type="password" class="form-control mb-2" id="loginPassword" placeholder="Contrasenya" />
-                    <button type="button" id="login" class="btn btn-primary float-right">Entrar</button>
-                    <button type="button" id="newUser" class="btn btn-link">Registrar-se</button>
-                </form>
-            </div>
-
-            <div class="col-8 offset-2" id="signupForm" style="display: none">
-                <h3>Nou Usuari</h3>
-                <form>
-                    <input type="email" class="form-control mb-2" id="signupEmail" placeholder="Email" />
-                    <input type="password" class="form-control mb-2" id="signupPassword" placeholder="Contrasenya" />
-                    <input type="password" class="form-control mb-2" id="signupPasswordConfirm" placeholder="Confirmar" />
-                    <input type="text" class="form-control mb-2" id="signupNom" placeholder="Nom" />
-                    <input type="text" class="form-control mb-2" id="signupCognom" placeholder="Cognom" />
-                    <input type="tel" class="form-control mb-2" id="signupTelefon" placeholder="Telèfon" />
-                    <input type="text" class="form-control mb-2" id="signupProvincia" placeholder="Província" />
-                    <button type="button" id="signup" class="btn btn-success float-right">Enviar</button>
-                    <button type="button" id="backToLogin" class="btn btn-link">Tornar</button>
-                </form>
-            </div>
-
-            <div class="col-8 offset-2" id="appContent" style="display: none">
-                <div id="itemsForm">
-                    <h4>Gestió</h4>
-                    <input type="text" class="form-control mb-2" id="title" placeholder="Títol" />
-                    <input type="text" class="form-control mb-2" id="content" placeholder="Contingut" />
-                    <input type="hidden" id="elementId" />
-                    <button type="button" id="save" class="btn btn-info">Guardar Ítem</button>
-                    <button type="button" id="btnLoadUsers" class="btn btn-secondary" onclick="loadUsers()">Veure Usuaris</button>
-                    <button type="button" id="logout" class="btn btn-outline-danger float-right">Sortir</button>
+          <div class="col-md-8">
+            <div class="card p-3 mb-3 bg-light">
+              <h4>Nou Component Informàtic</h4>
+              <form id="formNewComponent">
+                <div class="form-row">
+                  <div class="col-md-6 mb-2">
+                    <input type="text" class="form-control" id="compNom" placeholder="Nom tècnic (ex: RTX 3060)" required />
+                  </div>
+                  <div class="col-md-6 mb-2">
+                    <select class="form-control" id="compCategoria">
+                      <option value="CPU">Processador (CPU)</option>
+                      <option value="GPU">Targeta Gràfica (GPU)</option>
+                      <option value="RAM">Memòria RAM</option>
+                      <option value="SSD">Disc Sòlid (SSD)</option>
+                      <option value="PSU">Font d'alimentació</option>
+                      <option value="Placa Base">Placa Base</option>
+                    </select>
+                  </div>
                 </div>
-                <hr>
-                <div class="table-responsive">
-                    <table class="table table-hover" id="listItems"></table>
-                    <table class="table table-hover" id="listUsers"></table>
+                <div class="form-row">
+                  <div class="col-md-4 mb-2">
+                    <input type="number" class="form-control" id="compEstat" placeholder="Estat (0-10)" min="0" max="10" />
+                  </div>
+                  <div class="col-md-4 mb-2">
+                    <input type="number" class="form-control" id="compPreu" placeholder="Preu (€)" />
+                  </div>
+                  <div class="col-md-4 mb-2">
+                    <input type="text" class="form-control" id="compCompat" placeholder="Compatibilitat extra" />
+                  </div>
                 </div>
+                <button type="button" id="btnSaveComponent" class="btn btn-success btn-block">Publicar Component</button>
+              </form>
             </div>
+          </div>
         </div>
+
+        <div class="text-center">
+          <button type="button" class="btn btn-secondary" onclick="loadUsers()">Veure Usuaris</button>
+          <button type="button" id="logout" class="btn btn-outline-danger ml-2">Sortir</button>
+        </div>
+
+        <hr>
+        <div class="table-responsive">
+          <table class="table table-hover" id="listItems"></table>
+          <table class="table table-hover" id="listUsers"></table>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <script src="js/config.js"></script>
-    <script src="js/firestore.js"></script>
-    <script src="js/items.js"></script>
-    <script src="js/usuaris.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/firestore.js"></script>
+  <script src="js/items.js"></script>
+  <script src="js/usuaris.js"></script>
+  <script src="js/components.js"></script>
 
-    <script>
-        function showAlert(text, type) {
-            const alertEl = document.getElementById("alert");
-            alertEl.innerText = text;
-            alertEl.className = `alert ${type}`;
-            alertEl.style.display = "block";
-            setTimeout(() => { alertEl.style.display = "none"; }, 3000);
-        }
+  <script>
+    function showAlert(text, type) {
+      const alertEl = document.getElementById("alert");
+      alertEl.innerText = text;
+      alertEl.className = `alert ${type}`;
+      alertEl.style.display = "block";
+      setTimeout(() => { alertEl.style.display = "none"; }, 3000);
+    }
 
-        function showApp() {
-            document.getElementById("loginForm").style.display = "none";
-            document.getElementById("signupForm").style.display = "none";
-            document.getElementById("appContent").style.display = "block";
-            loadItems();
-        }
+    function showApp() {
+      document.getElementById("loginForm").style.display = "none";
+      document.getElementById("signupForm").style.display = "none";
+      document.getElementById("appContent").style.display = "block";
+      loadItems();
+    }
 
-        document.getElementById("login").onclick = async () => {
-            try {
-                await auth.signInWithEmailAndPassword(document.getElementById("loginEmail").value, document.getElementById("loginPassword").value);
-                showApp();
-            } catch (e) { showAlert(e.message, "alert-danger"); }
-        };
+    // LOGIN
+    document.getElementById("login").onclick = async () => {
+      try {
+        await auth.signInWithEmailAndPassword(document.getElementById("loginEmail").value, document.getElementById("loginPassword").value);
+        showApp();
+      } catch (e) { showAlert(e.message, "alert-danger"); }
+    };
 
-        document.getElementById("signup").onclick = async () => {
-            const email = document.getElementById("signupEmail").value;
-            const password = document.getElementById("signupPassword").value;
-            const extraData = {
-                nom: document.getElementById("signupNom").value,
-                cognom: document.getElementById("signupCognom").value,
-                telefon: document.getElementById("signupTelefon").value,
-                provincia: document.getElementById("signupProvincia").value
-            };
+    // SIGNUP
+    document.getElementById("signup").onclick = async () => {
+      const email = document.getElementById("signupEmail").value;
+      const password = document.getElementById("signupPassword").value;
+      const extraData = {
+        nom: document.getElementById("signupNom").value,
+        cognom: document.getElementById("signupCognom").value,
+        telefon: document.getElementById("signupTelefon").value,
+        provincia: document.getElementById("signupProvincia").value
+      };
+      try {
+        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+        await addUser(userCredential, extraData);
+        showApp();
+      } catch (e) { showAlert(e.message, "alert-danger"); }
+    };
 
-            try {
-                const userCred = await auth.createUserWithEmailAndPassword(email, password);
-                await addUser(userCred, extraData);
-                showApp();
-            } catch (e) { showAlert(e.message, "alert-danger"); }
-        };
+    // BOTÓ COMPONENT
+    document.getElementById("btnSaveComponent").onclick = async () => {
+      const formData = {
+        nom: document.getElementById("compNom").value,
+        categoria: document.getElementById("compCategoria").value,
+        estat: document.getElementById("compEstat").value,
+        preu: document.getElementById("compPreu").value,
+        compatibilitat: document.getElementById("compCompat").value
+      };
 
-        document.getElementById("newUser").onclick = () => {
-            document.getElementById("loginForm").style.display = "none";
-            document.getElementById("signupForm").style.display = "block";
-        };
+      if (!formData.nom) return showAlert("El nom és obligatori", "alert-danger");
 
-        document.getElementById("logout").onclick = () => { auth.signOut(); location.reload(); };
-        
-        document.getElementById("save").onclick = async () => {
-            const id = document.getElementById("elementId").value;
-            const doc = { title: document.getElementById("title").value, content: document.getElementById("content").value };
-            if (!id) await addItem(doc); else await updateItem(id, doc);
-        };
-    </script>
+      const btn = document.getElementById("btnSaveComponent");
+      btn.disabled = true;
+      btn.innerText = "Guardant...";
+
+      try {
+        await addComponent(formData);
+        document.getElementById("formNewComponent").reset();
+      } catch (e) {
+        showAlert(e.message, "alert-danger");
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "Publicar Component";
+      }
+    };
+
+    // Altres funcionalitats
+    document.getElementById("newUser").onclick = () => {
+      document.getElementById("loginForm").style.display = "none";
+      document.getElementById("signupForm").style.display = "block";
+    };
+    document.getElementById("backToLogin").onclick = () => {
+      document.getElementById("signupForm").style.display = "none";
+      document.getElementById("loginForm").style.display = "block";
+    };
+    document.getElementById("logout").onclick = () => { auth.signOut(); location.reload(); };
+    document.getElementById("save").onclick = async () => {
+      const id = document.getElementById("elementId").value;
+      const doc = { title: document.getElementById("title").value, content: document.getElementById("content").value };
+      if (!id) await addItem(doc); else await updateItem(id, doc);
+    };
+  </script>
 </body>
+
 </html>
