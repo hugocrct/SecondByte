@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 // Referència a la col·lecció "items" de Firestore
 const items = db.collection("items");
 
@@ -5,6 +6,8 @@ const items = db.collection("items");
  * Afegeix un nou document a la col·lecció.
  * @param {Object} doc - Objecte amb les propietats del nou ítem.
  */
+=======
+>>>>>>> Stashed changes
 async function addItem(doc) {
   try {
     // Esperem que Firebase afegeixi el document
@@ -12,6 +15,7 @@ async function addItem(doc) {
 
     // Recàrrega la llista d'ítems per a mostrar el nou element
     await loadItems();
+<<<<<<< Updated upstream
 
     // Neteja el formulari
     document.getElementById("title").value = "";
@@ -21,6 +25,11 @@ async function addItem(doc) {
     showAlert("Element guardat correctament", "alert-success");
   } catch (error) {
     // En cas d'error, mostra un missatge d'error
+=======
+    clearItemForm();
+    showAlert("Element guardat correctament", "alert-success");
+  } catch (error) {
+>>>>>>> Stashed changes
     showAlert("Error al intentar guardar l'element", "alert-danger");
   }
 }
@@ -36,11 +45,16 @@ async function deleteItem(id) {
 
     // Recàrrega la llista per reflectir l'eliminació
     await loadItems();
+<<<<<<< Updated upstream
 
     // Missatge d'èxit
     showAlert("Element eliminat correctament", "alert-success");
   } catch (error) {
     // Missatge d'error en cas de problema
+=======
+    showAlert("Element eliminat correctament", "alert-success");
+  } catch (error) {
+>>>>>>> Stashed changes
     showAlert("Error al intentar eliminar l'element", "alert-danger");
   }
 }
@@ -56,6 +70,7 @@ async function editItem(id) {
 
     // Esperem la lectura del document de Firestore
     const doc = await selectById(items, id);
+<<<<<<< Updated upstream
     const data = doc.data();
 
     // Omple el formulari amb les dades actuals
@@ -63,6 +78,12 @@ async function editItem(id) {
     document.getElementById("content").value = data.content;
   } catch (error) {
     // Si falla la lectura, mostra un error
+=======
+    const data = doc.data() || {};
+    document.getElementById("title").value = data.title || "";
+    document.getElementById("content").value = data.content || "";
+  } catch (error) {
+>>>>>>> Stashed changes
     showAlert("Error al intentar editar l'element", "alert-danger");
   }
 }
@@ -74,6 +95,7 @@ async function loadItems() {
   try {
     // Obtenim l'array de documents des de Firestore
     const arrayItems = await selectAll(items);
+<<<<<<< Updated upstream
 
     // Capçalera de la taula
     const table = document.getElementById("listItems");
@@ -105,15 +127,53 @@ async function loadItems() {
     });
   } catch (error) {
     // Error mostrant la taula
+=======
+    const tableBody = document.querySelector("#listItems tbody");
+    if (!tableBody) return;
+    tableBody.innerHTML = "";
+    arrayItems.forEach((doc) => {
+      const { title, content } = doc.data();
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${escapeHtml(title)}</td>
+        <td>${escapeHtml(content)}</td>
+        <td class="table-actions">
+          <button type="button" class="btn btn-sm btn-primary" onclick="editItem('${doc.id}')">Editar</button>
+          <button type="button" class="btn btn-sm btn-outline" onclick="deleteItem('${doc.id}')">Eliminar</button>
+        </td>
+      `;
+      tableBody.appendChild(row);
+    });
+  } catch (error) {
+>>>>>>> Stashed changes
     showAlert("Error al mostrar els elements", "alert-danger");
   }
 }
 
+<<<<<<< Updated upstream
 /**
  * Actualitza un document existent.
  * @param {string} id - ID del document a actualitzar.
  * @param {Object} doc - Objecte amb les noves dades.
  */
+=======
+function clearItemForm() {
+  document.getElementById("elementId").value = "";
+  document.getElementById("title").value = "";
+  document.getElementById("content").value = "";
+}
+
+function escapeHtml(str) {
+  if (!str) return "";
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/\"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+>>>>>>> Stashed changes
 async function updateItem(id, doc) {
   try {
     // Esperem que Firebase actualitzi el document
@@ -121,6 +181,7 @@ async function updateItem(id, doc) {
 
     // Recàrrega la llista per mostrar l'actualització
     await loadItems();
+<<<<<<< Updated upstream
 
     // Neteja el formulari i l'ID ocult
     document.getElementById("elementId").value = "";
@@ -131,6 +192,14 @@ async function updateItem(id, doc) {
     showAlert("Element actualitzat correctament", "alert-success");
   } catch (error) {
     // Missatge d'error si no es pot actualitzar
+=======
+    clearItemForm();
+    showAlert("Element actualitzat correctament", "alert-success");
+  } catch (error) {
+>>>>>>> Stashed changes
     showAlert("Error al intentar actualitzar l'element", "alert-danger");
   }
+  
 }
+  window.editItem = editItem;
+  window.deleteItem = deleteItem  

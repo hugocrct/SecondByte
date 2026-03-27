@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<<<<<<< Updated upstream
 <html>
   <head>
     <meta charset="utf-8" />
@@ -220,4 +221,524 @@
     });
 	
   </script>
+=======
+<html lang="ca">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SecondByte · Repair & Exchange Hub" />
+  <meta name="theme-color" content="#ff4fb3" />
+  <title>SecondByte</title>
+  <link rel="icon" type="image/png" href="img/LogoRodo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="cookie-banner" class="cookie-banner" role="alertdialog" aria-label="Consentiment de cookies">
+    <div class="cookie-content">
+      <div class="cookie-text">
+        <strong>🍪 Utilitzem cookies</strong>
+        <p>Fem servir cookies pròpies i de tercers per millorar l'experiència, analitzar l'ús del lloc i recordar preferències bàsiques.</p>
+      </div>
+      <div class="cookie-actions">
+        <button id="cookie-reject" class="btn btn-outline btn-sm" type="button">Només essencials</button>
+        <button id="cookie-accept" class="btn btn-primary btn-sm" type="button">Acceptar totes</button>
+      </div>
+    </div>
+  </div>
+
+  <button id="back-to-top" class="back-to-top" aria-label="Tornar a dalt" type="button">↑</button>
+  <div id="alert" role="alert" aria-live="polite"></div>
+
+  <header class="site-header">
+    <div class="shell">
+      <nav class="nav">
+        <a class="brand" href="#top" aria-label="SecondByte">
+          <img class="brand-mark" src="img/LogoQuadrat.png" alt="Logo Quadrat de SecondByte" />
+          <span class="brand-copy">
+            <span class="brand-title">SecondByte</span>
+            <span class="brand-subtitle">Repair &amp; Exchange Hub</span>
+          </span>
+        </a>
+
+        <button id="hamburger" class="hamburger" aria-label="Obrir menú" aria-expanded="false" aria-controls="nav-menu" type="button">
+          <span></span><span></span><span></span>
+        </button>
+
+        <ul class="nav-links" id="nav-menu">
+          <li><a href="#projecte">Projecte</a></li>
+          <li><a href="#funcionalitats">Funcionalitats</a></li>
+          <li><a href="#serveis">Serveis</a></li>
+          <li><a href="#marketplace">Marketplace</a></li>
+          <li><a href="#guies">Guies</a></li>
+          <li><a href="#vendre">Vendre</a></li>
+          <li><a href="#portal">Portal</a></li>
+        </ul>
+
+        <div class="nav-right">
+          <a class="nav-mail" href="mailto:support@secondbyte.cat">support@secondbyte.cat</a>
+          <a class="btn btn-primary btn-sm" href="#portal">Accedir</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div class="hero-content">
+          <span class="eyebrow">Green IT · Circular Economy</span>
+          <h1 class="hero-title">Dona una <span class="gradient-text">segona vida</span><br />a la teva tecnologia.</h1>
+          <p class="hero-text">SecondByte és un hub digital per intercanviar components, consultar guies de reparació, gestionar publicacions i connectar una comunitat tecnològica més intel·ligent. Menys residu, més utilitat i una UI que ja no sembla un càstig acadèmic.</p>
+          <div class="hero-buttons">
+            <a class="btn btn-primary" href="#marketplace">Explorar components</a>
+            <a class="btn btn-secondary" href="#vendre">Publicar producte</a>
+            <a class="btn btn-outline" href="#portal">Accedir al portal</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item"><span class="stat-number">Products</span><span class="stat-label">Marketplace en temps real</span></div>
+            <div class="stat-item"><span class="stat-number">Auth</span><span class="stat-label">Login, registre i control d'accés</span></div>
+            <div class="stat-item"><span class="stat-number">DB</span><span class="stat-label">Components, guies, transaccions i més</span></div>
+          </div>
+        </div>
+        <div class="hero-image glass-panel">
+          <img src="img/logoPrincipal.png" alt="SecondByte" class="hero-logo-img" onerror="this.style.display='none';document.getElementById('hero-logo-fallback').style.display='flex'" />
+          <div id="hero-logo-fallback" class="hero-logo-fallback" style="display:none">
+            <div class="hero-logo-icon">S</div>
+            <span>SecondByte</span>
+          </div>
+          <div class="hero-badge top"><span class="badge-dot"></span> Marketplace + Reparació</div>
+          <div class="hero-badge bottom"><span class="badge-dot"></span> Auth + Firestore + Dashboard</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projecte">
+      <div class="shell">
+        <div class="section-header">
+          <span class="eyebrow center">El projecte</span>
+          <h2 class="section-title">Transformem l'obsolescència en oportunitat</h2>
+          <p class="section-text">Una plataforma d'economia circular que permet vendre, reutilitzar, reparar i valorar tecnologia amb una base funcional real sobre Firebase.</p>
+        </div>
+        <div class="two-columns">
+          <div class="info-card">
+            <div class="info-icon"><i class="fas fa-recycle"></i></div>
+            <h3>Finalitat</h3>
+            <p>Mercat d'intercanvi de components, guies PDF i eines de gestió per allargar la vida útil dels dispositius.</p>
+          </div>
+          <div class="info-card">
+            <div class="info-icon"><i class="fas fa-users"></i></div>
+            <h3>Públic objectiu</h3>
+            <p>Gent jove i conscient que busca estalviar, aprendre i treure rendiment real del maquinari.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="funcionalitats">
+      <div class="shell">
+        <div class="section-header">
+          <span class="eyebrow center">Funcionalitats</span>
+          <h2 class="section-title">Tot el que necessites dins d'una sola plataforma</h2>
+          <p class="section-text">Marketplace, publicació de components, guies, transaccions, certificacions i valoracions socials.</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-item"><div class="feature-icon">⟳</div><h3>Marketplace</h3><p>Venda i compra de components amb dades reals a Firestore.</p><span class="feature-tag">Compra · Venda · Intercanvi</span></div>
+          <div class="feature-item"><div class="feature-icon">✓</div><h3>Certificació</h3><p>Gestió d'enviaments i confirmació de recepció dels paquets.</p><span class="feature-tag">Seguiment</span></div>
+          <div class="feature-item"><div class="feature-icon">⌗</div><h3>Compatibilitat</h3><p>Publicació de components amb compatibilitats recomanades i dades útils.</p><span class="feature-tag">DIY + Upgrade</span></div>
+          <div class="feature-item"><div class="feature-icon">★</div><h3>Valoracions</h3><p>Comunitat basada en reputació i valoracions post-transacció.</p><span class="feature-tag">Confiança</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-gradient" id="serveis">
+      <div class="shell">
+        <div class="section-header">
+          <span class="eyebrow center">Serveis</span>
+          <h2 class="section-title">Tot el que necessites per allargar la vida dels teus dispositius</h2>
+          <p class="section-text">Serveis pensats per fer útil la plataforma més enllà de penjar un simple anunci.</p>
+        </div>
+        <div class="services-grid">
+          <div class="service-item">
+            <i class="fas fa-chart-line"></i>
+            <h3>Diagnòstic gratuït</h3>
+            <p>Avaluació tècnica inicial per entendre l'estat del dispositiu o component.</p>
+          </div>
+          <div class="service-item">
+            <i class="fas fa-handshake"></i>
+            <h3>Intercanvi segur</h3>
+            <p>Base per a futures transaccions amb traçabilitat, valoracions i reputació.</p>
+          </div>
+          <div class="service-item">
+            <i class="fas fa-book-open"></i>
+            <h3>Biblioteca de guies</h3>
+            <p>Accés ràpid a documentació i guies per reparació, manteniment i upgrade.</p>
+          </div>
+          <div class="service-item">
+            <i class="fas fa-calculator"></i>
+            <h3>Assessorament tècnic</h3>
+            <p>Compatibilitat, selecció de peces i optimització de pressupost amb cap.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="marketplace">
+      <div class="shell">
+        <div class="marketplace-header">
+          <span class="eyebrow center">Marketplace</span>
+          <h2 class="section-title">Components publicats i productes destacats</h2>
+          <p class="section-text">Carrega productes de mostra i tot el que publiquis des del formulari.</p>
+        </div>
+        <div class="filters">
+          <select id="categoryFilter" class="filter-select">
+            <option value="all">Totes les categories</option>
+            <option value="processador">Processador</option>
+            <option value="placa_base">Placa base</option>
+            <option value="targeta_grafica">Targeta gràfica</option>
+            <option value="ram">RAM</option>
+            <option value="emmagatzematge">Emmagatzematge</option>
+            <option value="smartphones">Smartphones</option>
+            <option value="portatils">Portàtils</option>
+            <option value="components">Components</option>
+            <option value="tablets">Tablets</option>
+          </select>
+          <select id="conditionFilter" class="filter-select">
+            <option value="all">Tots els estats</option>
+            <option value="excellent">Excel·lent</option>
+            <option value="good">Bo</option>
+            <option value="fair">Acceptable</option>
+          </select>
+          <select id="sortFilter" class="filter-select">
+            <option value="price_asc">Preu: menor a major</option>
+            <option value="price_desc">Preu: major a menor</option>
+            <option value="newest">Més recent</option>
+            <option value="name_asc">Nom A-Z</option>
+          </select>
+          <button id="applyFilters" class="btn btn-primary">Aplicar filtres</button>
+        </div>
+        <div id="productsGrid" class="products-grid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="guies">
+      <div class="shell">
+        <div class="section-header">
+          <span class="eyebrow center">Recursos</span>
+          <h2 class="section-title">Guies de reparació i manteniment</h2>
+          <p class="section-text">Exemples de recursos i espai per les guies vinculades des del dashboard.</p>
+        </div>
+        <div class="guides-grid">
+          <div class="guide-item"><i class="fas fa-microchip"></i><div><h3>Guia de reparació de fonts d'alimentació</h3><p>Diagnòstic i reparació de problemes habituals.</p><span>External PDF</span><a href="https://www.repairfaq.org/REPAIR/F_power.html" target="_blank" rel="noopener">Obrir →</a></div></div>
+          <div class="guide-item"><i class="fas fa-memory"></i><div><h3>Manteniment de memòries RAM</h3><p>Com netejar i verificar l'estat de la memòria.</p><span>External PDF</span><a href="https://www.memtest86.com/" target="_blank" rel="noopener">Obrir →</a></div></div>
+          <div class="guide-item"><i class="fas fa-hdd"></i><div><h3>Recuperació de dades en SSD</h3><p>Tècniques bàsiques per recuperar informació.</p><span>External PDF</span><a href="https://www.ssd-recovery.com/" target="_blank" rel="noopener">Obrir →</a></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="vendre">
+      <div class="shell">
+        <div class="sell-grid">
+          <div class="sell-info">
+            <span class="eyebrow">Vendre a SecondByte</span>
+            <h2>Publica un producte en pocs passos</h2>
+            <p>Formulari integrat per pujar productes al marketplace. Si no has iniciat sessió, et portarà al portal. El drama mínimo imprescindible.</p>
+            <div class="sell-features">
+              <div><span>💰</span><div><strong>Sense comissions</strong><p>Publicació directa</p></div></div>
+              <div><span>⚡</span><div><strong>Valoració ràpida</strong><p>Des del mateix formulari</p></div></div>
+              <div><span>🔒</span><div><strong>Publicació vinculada</strong><p>Associada a l'usuari loguejat</p></div></div>
+            </div>
+          </div>
+          <div class="sell-form">
+            <h3>Publicar producte</h3>
+            <form id="sellFormElement">
+              <input type="text" id="productName" placeholder="Nom del component" required />
+              <div class="row-2">
+                <select id="productCategory" required>
+                  <option value="">Categoria</option>
+                  <option value="processador">Processador</option>
+                  <option value="placa_base">Placa base</option>
+                  <option value="targeta_grafica">Targeta gràfica</option>
+                  <option value="ram">Memòria RAM</option>
+                  <option value="emmagatzematge">Emmagatzematge</option>
+                  <option value="components">Altre component</option>
+                </select>
+                <select id="productCondition" required>
+                  <option value="">Estat</option>
+                  <option value="excellent">Excel·lent</option>
+                  <option value="good">Bo</option>
+                  <option value="fair">Acceptable</option>
+                </select>
+              </div>
+              <div class="row-2">
+                <input type="number" id="productPrice" placeholder="Preu (€)" required />
+                <input type="number" id="productOriginalPrice" placeholder="Preu original (opcional)" />
+              </div>
+              <textarea id="productDescription" rows="4" placeholder="Descripció detallada..." required></textarea>
+              <div class="upload-row">
+                <input type="hidden" id="productImageUrl" />
+                <input type="file" id="productImageFile" accept="image/*" hidden />
+                <button type="button" id="uploadImageBtn" class="btn btn-outline">Pujar imatge</button>
+                <input type="url" id="productImageManual" placeholder="o enganxa URL d'imatge" />
+              </div>
+              <div id="imagePreview" class="image-preview"></div>
+              <button type="submit" class="btn btn-primary btn-block">Publicar al marketplace</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="portal">
+      <div class="shell">
+        <div class="section-header">
+          <span class="eyebrow center">Àrea personal</span>
+          <h2 class="section-title">Autenticació i gestió completa</h2>
+          <p class="section-text">Accedeix, registra't i gestiona totes les col·leccions principals del projecte.</p>
+        </div>
+
+        <div id="topBar" class="dashboard-header d-none">
+          <div><h3>Panell de control</h3><p id="authStatus"></p></div>
+          <button id="logout" class="btn btn-outline">Tancar sessió</button>
+        </div>
+
+        <div class="portal-grid">
+          <div class="portal-sidebar">
+            <div class="steps-card">
+              <h3>Com començar</h3>
+              <ul>
+                <li><span>01</span><div><strong>Crea el teu compte</strong><p>Registra't gratuïtament</p></div></li>
+                <li><span>02</span><div><strong>Publica components i productes</strong><p>Gestiona el marketplace i la base de dades</p></div></li>
+                <li><span>03</span><div><strong>Opera tota la plataforma</strong><p>Guies, transaccions, certificacions i valoracions</p></div></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="portal-main">
+            <div id="loginForm" class="auth-box">
+              <h2>Inici de sessió</h2>
+              <form id="loginFormElement">
+                <input type="email" id="loginEmail" placeholder="Correu electrònic" required />
+                <input type="password" id="loginPassword" placeholder="Contrasenya" required />
+                <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                <div class="divider">o</div>
+                <button type="button" id="googleLogin" class="btn btn-outline btn-block"><i class="fab fa-google"></i> Continuar amb Google</button>
+                <p>No tens compte? <button type="button" id="newUser" class="btn-link">Crear compte</button></p>
+              </form>
+            </div>
+
+            <div id="signupForm" class="auth-box d-none">
+              <h2>Crear compte</h2>
+              <form id="signupFormElement">
+                <input type="email" id="signupEmail" placeholder="Correu electrònic" required />
+                <input type="password" id="signupPassword" placeholder="Contrasenya (mínim 8 caràcters)" required />
+                <input type="password" id="signupPasswordConfirm" placeholder="Confirmar contrasenya" required />
+                <input type="text" id="signupNom" placeholder="Nom" required />
+                <input type="text" id="signupCognom" placeholder="Cognom" required />
+                <input type="tel" id="signupTelefon" placeholder="Telèfon" />
+                <input type="text" id="signupProvincia" placeholder="Província" />
+                <button type="submit" class="btn btn-primary btn-block">Registrar-se</button>
+                <div class="divider">o</div>
+                <button type="button" id="googleSignup" class="btn btn-outline btn-block"><i class="fab fa-google"></i> Registrar-se amb Google</button>
+                <p>Ja tens compte? <button type="button" id="backToLogin" class="btn-link">Iniciar sessió</button></p>
+              </form>
+            </div>
+
+            <div id="itemsPanel" class="items-panel d-none">
+              <div class="dashboard-grid">
+                <div class="dashboard-card item-form">
+                  <h3>Notes / articles interns</h3>
+                  <form id="itemsFormElement">
+                    <input type="text" id="title" placeholder="Títol" required />
+                    <textarea id="content" rows="4" placeholder="Descripció detallada..." required></textarea>
+                    <div class="form-actions">
+                      <button type="button" id="clearItem" class="btn btn-outline">Netejar</button>
+                      <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                    <input type="hidden" id="elementId" />
+                  </form>
+                </div>
+
+                <div id="appContent" style="display: none">
+      <div class="card p-3 mb-4">
+        <h4>📦 Nou Component</h4>
+        <form id="compFormElement"> <input type="text" class="form-control mb-2" id="compNom" placeholder="Nom producte" required />
+          <select class="form-control mb-2" id="compCategoria">
+            <option value="CPU">CPU</option>
+            <option value="GPU">GPU</option>
+            <option value="RAM">RAM</option>
+            <option value="Placa Base">Placa Base</option>
+          </select>
+          <input type="number" class="form-control mb-2" id="compPreu" placeholder="Preu (€)" required />
+          <input type="text" class="form-control mb-2" id="compEstat" placeholder="Estat (0-10)" />
+          <input type="text" class="form-control mb-2" id="compCompatibilitat" placeholder="Compatibilitat extra" />
+          <button type="submit" class="btn btn-success btn-block">Publicar Component</button>
+        </form>
+      </div>
+
+                <div class="dashboard-card">
+                  <h3>Nova guia</h3>
+                  <form id="formNewGuia" class="stack-form">
+                    <input type="text" id="guiaNom" placeholder="Títol guia" />
+                    <select id="guiaFiltre">
+                      <option value="">-- Categoria --</option>
+                      <option value="CPU">CPU</option>
+                      <option value="GPU">GPU</option>
+                      <option value="RAM">RAM</option>
+                      <option value="Placa Base">Placa Base</option>
+                    </select>
+                    <select id="guiaIdComp" disabled></select>
+                    <input type="text" id="guiaPDF" placeholder="URL PDF" />
+                    <button type="button" id="btnSaveGuia" class="btn btn-primary btn-block">Vincular guia</button>
+                  </form>
+                </div>
+
+                <div class="dashboard-card wide-card">
+                  <h3>Transacció</h3>
+                  <form id="formTransaccio" class="stack-form">
+                    <div class="row-3">
+                      <select id="transProducte"></select>
+                      <select id="transVenedor"></select>
+                      <select id="transComprador"></select>
+                    </div>
+                    <div class="row-3">
+                      <select id="transTipus">
+                        <option value="true">Compra</option>
+                        <option value="false">Intercanvi</option>
+                      </select>
+                      <input type="number" id="transPreu" placeholder="Preu (€)" />
+                      <button type="button" id="btnSaveTransaccio" class="btn btn-primary btn-block">Registrar</button>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="dashboard-card wide-card">
+                  <h3>Gestió d'enviaments</h3>
+                  <form id="formCertificacio" class="stack-form">
+                    <div class="row-2">
+                      <select id="certTransaccio"></select>
+                      <select id="certReceptor"></select>
+                    </div>
+                    <div class="row-3">
+                      <input type="text" id="certAdreca" placeholder="Adreça enviament" />
+                      <input type="text" id="certEmpresa" placeholder="Empresa transport" />
+                      <input type="text" id="certSeguiment" placeholder="Seguiment (opcional)" />
+                    </div>
+                    <button type="button" id="btnSaveCertificacio" class="btn btn-primary btn-block">Registrar enviament</button>
+                  </form>
+                  <div class="mini-table-wrap">
+                    <h4>Els meus paquets a rebre</h4>
+                    <table class="mini-table"><thead><tr><th>Tracking</th><th>Estat</th><th>Acció</th></tr></thead><tbody id="listCertificacions"></tbody></table>
+                  </div>
+                </div>
+
+                <div class="dashboard-card wide-card">
+                  <h3>Valoració</h3>
+                  <form id="formValoracio" class="stack-form">
+                    <div class="row-3">
+                      <select id="valTransaccio"></select>
+                      <select id="valUsuariPuntuat"></select>
+                      <input type="number" id="valPuntuacio" min="0" max="10" placeholder="Nota 0-10" />
+                    </div>
+                    <input type="text" id="valComentari" placeholder="Comentari" />
+                    <button type="button" id="btnSaveValoracio" class="btn btn-primary btn-block">Enviar valoració</button>
+                  </form>
+                </div>
+
+                <div id="emptyState" class="empty-state d-none"><i class="fas fa-box-open"></i><p>No tens cap article creat</p></div>
+
+                <div class="dashboard-card wide-card items-table">
+                  <h3>Articles interns</h3>
+                  <table class="table d-none" id="listItems">
+                    <thead><tr><th>Títol</th><th>Descripció</th><th>Accions</th></tr></thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+
+                <div class="dashboard-card half-card">
+                  <div class="panel-actions">
+                    <h3>Usuaris</h3>
+                    <button type="button" id="loadUsersBtn" class="btn btn-outline btn-sm">Carregar</button>
+                  </div>
+                  <table class="mini-table" id="listUsers"></table>
+                </div>
+
+                <div class="dashboard-card half-card">
+                  <div class="panel-actions">
+                    <h3>Guies</h3>
+                    <button type="button" id="loadGuiasBtn" class="btn btn-outline btn-sm">Carregar</button>
+                  </div>
+                  <table class="mini-table" id="listGuias"></table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section legal-section" id="avis-legal">
+      <div class="shell">
+        <div class="legal-full">
+          <span class="eyebrow center">Informació legal</span>
+          <h2 class="section-title">Avís legal i política de cookies</h2>
+          <div class="legal-content">
+            <div class="legal-block">
+              <h3><i class="fas fa-file-alt"></i> Avís legal</h3>
+              <p><strong>SecondByte</strong> és una plataforma orientada a l'economia circular tecnològica i l'intercanvi de components reacondicionats.</p>
+              <ul>
+                <li><strong>Correu de contacte:</strong> <a href="mailto:legal@secondbyte.cat">legal@secondbyte.cat</a></li>
+                <li><strong>Àmbit:</strong> publicació, intercanvi i consulta de components i guies de reparació</li>
+                <li><strong>Responsabilitat:</strong> cada usuari respon de la veracitat del contingut publicat</li>
+              </ul>
+              <p>SecondByte no garanteix per defecte cada transacció entre particulars. La plataforma serveix de punt de trobada, gestió i consulta.</p>
+            </div>
+            <div class="legal-block">
+              <h3><i class="fas fa-cookie-bite"></i> Política de cookies</h3>
+              <p>Utilitzem cookies essencials per al funcionament bàsic i, amb consentiment, cookies d'anàlisi i preferències.</p>
+              <ul>
+                <li><strong>Tècniques:</strong> necessàries per autenticació i funcionament</li>
+                <li><strong>D'anàlisi:</strong> per entendre l'ús del lloc</li>
+                <li><strong>Preferències:</strong> per recordar opcions bàsiques de navegació</li>
+              </ul>
+              <p>Pots acceptar o rebutjar les no essencials des del bàner superior. Sí, al menos aquí fingimos respetar al usuario.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer section-footer">
+    <div class="shell footer-grid footer-shell">
+      <div class="footer-left">
+        <img src="img/LogoRodo.png" alt="SecondByte" />
+        <div>
+          <h3>SecondByte</h3>
+          <p>Repair &amp; Exchange Hub</p>
+        </div>
+      </div>
+      <div class="footer-right footer-links"><a href="#projecte">Projecte</a><a href="#serveis">Serveis</a><a href="#marketplace">Marketplace</a><a href="#avis-legal">Avís legal</a><a href="mailto:support@secondbyte.cat">support@secondbyte.cat</a></div>
+    </div>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+
+  <script src="js/config.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/firestore.js"></script>
+  <script src="js/usuaris.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/guias.js"></script>
+  <script src="js/transaccions.js"></script>
+  <script src="js/valoracions.js"></script>
+  <script src="js/certificacions.js"></script>
+  <script src="js/main.js"></script> </body>
+</body>
+>>>>>>> Stashed changes
 </html>
