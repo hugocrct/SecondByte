@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
+  // Inicialitzar components UI (hamburger, active nav, back to top, cookie banner)
+  initUIComponents();
+  
   // Inicialitzar setup de pujada d'imatges
   setupImageUpload();
   
@@ -50,7 +53,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const productPrice = parseFloat(document.getElementById("productPrice").value);
     const productOriginalPrice = document.getElementById("productOriginalPrice").value ? parseFloat(document.getElementById("productOriginalPrice").value) : null;
     const productDescription = document.getElementById("productDescription").value.trim();
-    const productImageUrl = document.getElementById("productImageUrl").value;
+    const productImageUrl = document.getElementById("productImage").value;
 
     if (!productName || !productCategory || !productCondition || !productPrice || !productDescription) {
       showAlert("Tots els camps obligatoris han d'estar plens", "alert-danger");

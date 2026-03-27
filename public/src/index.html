@@ -1,32 +1,60 @@
 <!DOCTYPE html>
 <html lang="ca">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SecondByte - Repair & Exchange Hub</title>
-  <meta name="description" content="Plataforma d'economia circular tecnològica. Marketplace de components reacondicionats amb garantia." />
+  <meta name="description"
+    content="Plataforma d'economia circular tecnològica. Marketplace de components reacondicionats amb garantia." />
   <meta name="theme-color" content="#ff4fb3" />
   <link rel="icon" type="image/png" href="../img/logoQuadrat.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+  <!-- Cookie Banner (RGPD) -->
+  <div id="cookie-banner" class="cookie-banner" role="alertdialog" aria-label="Consentiment de cookies">
+    <div class="cookie-content">
+      <div class="cookie-text">
+        <strong>🍪 Utilitzem cookies</strong>
+        <p>Fem servir cookies pròpies i de tercers per millorar la teva experiència i analitzar l'ús del lloc. Pots acceptar-les totes o rebutjar les no essencials.</p>
+      </div>
+      <div class="cookie-actions">
+        <button id="cookie-reject" class="btn btn-outline btn-sm">Només essencials</button>
+        <button id="cookie-accept" class="btn btn-primary btn-sm">Acceptar totes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to top -->
+  <button id="back-to-top" class="back-to-top" aria-label="Tornar a dalt">↑</button>
+
   <div id="alert" role="alert" aria-live="polite"></div>
 
   <header class="site-header">
     <div class="shell">
       <nav class="nav">
         <a class="brand" href="#top">
-          <img class="brand-mark" src="../img/logoQuadrat.png" alt="SecondByte" />
+          <img class="brand-mark" src="img/logoQuadrat.png" alt="SecondByte"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+          <div class="brand-mark brand-mark-fallback"
+            style="display:none;width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#ff4fb3,#37b8ff);align-items:center;justify-content:center;font-weight:800;font-size:1rem;color:white;flex-shrink:0;">
+            S</div>
           <div class="brand-copy">
             <span class="brand-title">SecondByte</span>
             <span class="brand-subtitle">Repair & Exchange Hub</span>
           </div>
         </a>
-        <ul class="nav-links">
+        <button id="hamburger" class="hamburger" aria-label="Obrir menú" aria-expanded="false" aria-controls="nav-menu">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="nav-menu">
           <li><a href="#projecte">Projecte</a></li>
           <li><a href="#funcionalitats">Funcionalitats</a></li>
           <li><a href="#serveis">Serveis</a></li>
@@ -50,8 +78,11 @@
         <div class="hero-grid">
           <div class="hero-content">
             <span class="eyebrow">Green IT · Circular Economy</span>
-            <h1 class="hero-title">Dona una <span class="gradient-text">segona vida</span><br />a la teva tecnologia.</h1>
-            <p class="hero-text">SecondByte és un hub digital per intercanviar components, consultar guies de reparació i gestionar les teves publicacions. Menys residu, més utilitat i una experiència professional alineada amb els valors de sostenibilitat.</p>
+            <h1 class="hero-title">Dona una <span class="gradient-text">segona vida</span><br />a la teva tecnologia.
+            </h1>
+            <p class="hero-text">SecondByte és un hub digital per intercanviar components, consultar guies de reparació
+              i gestionar les teves publicacions. Menys residu, més utilitat i una experiència professional alineada amb
+              els valors de sostenibilitat.</p>
             <div class="hero-buttons">
               <a class="btn btn-primary" href="#marketplace">Explorar components</a>
               <a class="btn btn-secondary" href="#vendre">Vendre el teu dispositiu</a>
@@ -73,7 +104,12 @@
             </div>
           </div>
           <div class="hero-image glass-panel">
-            <img src="../img/logoPrincipal.png" alt="SecondByte" class="hero-logo-img" />
+            <img src="img/logoPrincipal.png" alt="SecondByte" class="hero-logo-img"
+              onerror="this.style.display='none';document.getElementById('hero-logo-fallback').style.display='flex'" />
+            <div id="hero-logo-fallback" class="hero-logo-fallback" style="display:none">
+              <div class="hero-logo-icon">S</div>
+              <span>SecondByte</span>
+            </div>
             <div class="hero-badge top">
               <span class="badge-dot"></span> Marketplace + Reparació
             </div>
@@ -91,18 +127,21 @@
         <div class="section-header">
           <span class="eyebrow center">El projecte</span>
           <h2 class="section-title">Transformem l'obsolescència en oportunitat</h2>
-          <p class="section-text">SecondByte és una plataforma digital d'economia circular que combat l'obsolescència programada mitjançant un mercat d'intercanvi de components i guies de reparació.</p>
+          <p class="section-text">SecondByte és una plataforma digital d'economia circular que combat l'obsolescència
+            programada mitjançant un mercat d'intercanvi de components i guies de reparació.</p>
         </div>
         <div class="two-columns">
           <div class="info-card">
             <div class="info-icon"><i class="fas fa-recycle"></i></div>
             <h3>Finalitat</h3>
-            <p>Crear un hub de components i guies de reparació on els usuaris puguin publicar, intercanviar i consultar informació tècnica, allargant la vida útil dels dispositius.</p>
+            <p>Crear un hub de components i guies de reparació on els usuaris puguin publicar, intercanviar i consultar
+              informació tècnica, allargant la vida útil dels dispositius.</p>
           </div>
           <div class="info-card">
             <div class="info-icon"><i class="fas fa-users"></i></div>
             <h3>Públic objectiu</h3>
-            <p>Una generació jove i conscient que busca maximitzar el rendiment sense malgastar recursos, transformant la "caducitat" en oportunitat d'estalvi.</p>
+            <p>Una generació jove i conscient que busca maximitzar el rendiment sense malgastar recursos, transformant
+              la "caducitat" en oportunitat d'estalvi.</p>
           </div>
         </div>
         <div class="team-section">
@@ -111,22 +150,22 @@
             <div class="team-card">
               <div class="team-avatar">HC</div>
               <div class="team-name">Hugo Carrasco</div>
-              <div class="team-role">Administració</div>
+              <div class="team-role">Database</div>
             </div>
             <div class="team-card">
               <div class="team-avatar">OM</div>
               <div class="team-name">Oriol March</div>
-              <div class="team-role">Frontend</div>
+              <div class="team-role">Procuct Manager</div>
             </div>
             <div class="team-card">
               <div class="team-avatar">FC</div>
               <div class="team-name">Fernando Cascón</div>
-              <div class="team-role">Backend</div>
+              <div class="team-role">Frontend</div>
             </div>
             <div class="team-card">
               <div class="team-avatar">AG</div>
               <div class="team-name">Anastasia Gubareva</div>
-              <div class="team-role">Product Manager</div>
+              <div class="team-role">Backend</div>
             </div>
           </div>
         </div>
@@ -252,7 +291,8 @@
               <h3>Guia de reparació de fonts d'alimentació</h3>
               <p>Aprèn a diagnosticar i reparar problemes comuns en fonts d'alimentació.</p>
               <span>PDF · 2.4 MB</span>
-              <a href="https://www.repairfaq.org/REPAIR/F_power.html" target="_blank" rel="noopener noreferrer">Descarregar →</a>
+              <a href="https://www.repairfaq.org/REPAIR/F_power.html" target="_blank"
+                rel="noopener noreferrer">Descarregar →</a>
             </div>
           </div>
           <div class="guide-item">
@@ -279,12 +319,14 @@
               <h3>Optimització per a gaming</h3>
               <p>Configuració per maximitzar el rendiment en jocs.</p>
               <span>PDF · 2.1 MB</span>
-              <a href="https://www.pcgamer.com/best-pc-gaming-settings/" target="_blank" rel="noopener noreferrer">Descarregar →</a>
+              <a href="https://www.pcgamer.com/best-pc-gaming-settings/" target="_blank"
+                rel="noopener noreferrer">Descarregar →</a>
             </div>
           </div>
         </div>
         <div class="text-center mt-5">
-          <a href="https://www.ifixit.com/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Veure totes les guies</a>
+          <a href="https://www.ifixit.com/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Veure
+            totes les guies</a>
         </div>
       </div>
     </section>
@@ -298,9 +340,21 @@
             <h2>Transforma el teu component en valor</h2>
             <p>Ven el teu component usat de manera fàcil, ràpida i segura.</p>
             <div class="sell-features">
-              <div><span>💰</span><div><strong>Sense comissions</strong><p>No hi ha costos ocults</p></div></div>
-              <div><span>⚡</span><div><strong>Valoració ràpida</strong><p>En menys de 5 minuts</p></div></div>
-              <div><span>🔒</span><div><strong>Pagament segur</strong><p>Transferència en 24h</p></div></div>
+              <div><span>💰</span>
+                <div><strong>Sense comissions</strong>
+                  <p>No hi ha costos ocults</p>
+                </div>
+              </div>
+              <div><span>⚡</span>
+                <div><strong>Valoració ràpida</strong>
+                  <p>En menys de 5 minuts</p>
+                </div>
+              </div>
+              <div><span>🔒</span>
+                <div><strong>Pagament segur</strong>
+                  <p>Transferència en 24h</p>
+                </div>
+              </div>
             </div>
           </div>
           <div class="sell-form">
@@ -342,10 +396,14 @@
         <div class="section-header">
           <span class="eyebrow center">Àrea personal</span>
           <h2 class="section-title">Gestiona les teves publicacions</h2>
-          <p class="section-text">Accedeix al teu espai personal per gestionar els teus anuncis i connectar amb la comunitat.</p>
+          <p class="section-text">Accedeix al teu espai personal per gestionar els teus anuncis i connectar amb la
+            comunitat.</p>
         </div>
         <div id="topBar" class="dashboard-header d-none">
-          <div><h3>Panell de control</h3><p id="authStatus"></p></div>
+          <div>
+            <h3>Panell de control</h3>
+            <p id="authStatus"></p>
+          </div>
           <button id="logout" class="btn btn-outline">Tancar sessió</button>
         </div>
         <div class="portal-grid">
@@ -353,9 +411,21 @@
             <div class="steps-card">
               <h3>Com començar</h3>
               <ul>
-                <li><span>01</span><div><strong>Crea el teu compte</strong><p>Registra't gratuïtament</p></div></li>
-                <li><span>02</span><div><strong>Publica els teus components</strong><p>Afegeix fotos i descripció</p></div></li>
-                <li><span>03</span><div><strong>Connecta amb la comunitat</strong><p>Rep ofertes i tanca vendes</p></div></li>
+                <li><span>01</span>
+                  <div><strong>Crea el teu compte</strong>
+                    <p>Registra't gratuïtament</p>
+                  </div>
+                </li>
+                <li><span>02</span>
+                  <div><strong>Publica els teus components</strong>
+                    <p>Afegeix fotos i descripció</p>
+                  </div>
+                </li>
+                <li><span>03</span>
+                  <div><strong>Connecta amb la comunitat</strong>
+                    <p>Rep ofertes i tanca vendes</p>
+                  </div>
+                </li>
               </ul>
             </div>
           </div>
@@ -367,7 +437,8 @@
                 <input type="password" id="loginPassword" placeholder="Contrasenya" required />
                 <button type="submit" class="btn btn-primary btn-block">Entrar</button>
                 <div class="divider">o</div>
-                <button type="button" id="googleLogin" class="btn btn-outline btn-block"><i class="fab fa-google"></i> Continuar amb Google</button>
+                <button type="button" id="googleLogin" class="btn btn-outline btn-block"><i class="fab fa-google"></i>
+                  Continuar amb Google</button>
                 <p>No tens compte? <button type="button" id="newUser" class="btn-link">Crear compte</button></p>
               </form>
             </div>
@@ -379,7 +450,8 @@
                 <input type="password" id="signupPasswordConfirm" placeholder="Confirmar contrasenya" required />
                 <button type="submit" class="btn btn-primary btn-block">Registrar-se</button>
                 <div class="divider">o</div>
-                <button type="button" id="googleSignup" class="btn btn-outline btn-block"><i class="fab fa-google"></i> Registrar-se amb Google</button>
+                <button type="button" id="googleSignup" class="btn btn-outline btn-block"><i class="fab fa-google"></i>
+                  Registrar-se amb Google</button>
                 <p>Ja tens compte? <button type="button" id="backToLogin" class="btn-link">Iniciar sessió</button></p>
               </form>
             </div>
@@ -402,7 +474,7 @@
               </div>
               <div class="items-table">
                 <table class="table d-none" id="listItems">
-                  <thead> ox:th>Títol</th><th>Descripció</th><th></th> </thead>
+                  <thead><tr><th>Títol</th><th>Descripció</th><th></th></tr></thead>
                   <tbody></tbody>
                 </table>
               </div>
@@ -421,38 +493,53 @@
           <div class="legal-content">
             <div class="legal-block">
               <h3><i class="fas fa-file-alt"></i> Avís legal</h3>
-              <p><strong>SecondByte</strong> és una plataforma d'intercanvi de components tecnològics gestionada per:</p>
+              <p><strong>SecondByte</strong> és una plataforma d'intercanvi de components tecnològics gestionada per:
+              </p>
               <ul>
                 <li><strong>Denominació social:</strong> SecondByte Technologies SL</li>
                 <li><strong>NIF:</strong> B-12345678</li>
                 <li><strong>Domicili social:</strong> Carrer de la Tecnologia, 42, 08001 Barcelona</li>
                 <li><strong>Correu electrònic:</strong> <a href="mailto:legal@secondbyte.cat">legal@secondbyte.cat</a></li>
               </ul>
-              <p>Aquesta plataforma té com a objectiu fomentar l'economia circular mitjançant l'intercanvi de components electrònics reacondicionats. Tots els usuaris són responsables de la veracitat de la informació publicada.</p>
-              <p>SecondByte no es fa responsable de l'ús inadequat dels components ni de les transaccions realitzades entre usuaris. Totes les vendes estan subjectes a les condicions generals establertes.</p>
-              <p>Per a qualsevol consulta, pots contactar amb nosaltres a través del correu electrònic <strong>legal@secondbyte.cat</strong>.</p>
+              <p>Aquesta plataforma té com a objectiu fomentar l'economia circular mitjançant l'intercanvi de components
+                electrònics reacondicionats. Tots els usuaris són responsables de la veracitat de la informació
+                publicada.</p>
+              <p>SecondByte no es fa responsable de l'ús inadequat dels components ni de les transaccions realitzades
+                entre usuaris. Totes les vendes estan subjectes a les condicions generals establertes.</p>
+              <p>Per a qualsevol consulta, pots contactar amb nosaltres a través del correu electrònic <strong><a href="mailto:legal@secondbyte.cat">legal@secondbyte.cat</a></strong>.</p>
             </div>
             <div class="legal-block">
               <h3><i class="fas fa-cookie-bite"></i> Política de cookies</h3>
-              <p>En compliment de la Llei 34/2002, d'11 de juliol, de serveis de la societat de la informació i de comerç electrònic (LSSI-CE), us informem que aquest lloc web utilitza cookies pròpies i de tercers per millorar la vostra experiència de navegació.</p>
+              <p>En compliment de la Llei 34/2002, d'11 de juliol, de serveis de la societat de la informació i de
+                comerç electrònic (LSSI-CE), us informem que aquest lloc web utilitza cookies pròpies i de tercers per
+                millorar la vostra experiència de navegació.</p>
               <h4>Què són les cookies?</h4>
-              <p>Les cookies són petits fitxers de text que s'emmagatzemen al vostre navegador quan visiteu un lloc web. Aquestes permeten recordar les vostres preferències i oferir-vos una experiència personalitzada.</p>
+              <p>Les cookies són petits fitxers de text que s'emmagatzemen al vostre navegador quan visiteu un lloc web.
+                Aquestes permeten recordar les vostres preferències i oferir-vos una experiència personalitzada.</p>
               <h4>Tipus de cookies que utilitzem:</h4>
               <ul>
                 <li><strong>Cookies tècniques:</strong> Necessàries per al funcionament bàsic de la plataforma.</li>
-                <li><strong>Cookies d'anàlisi:</strong> Ens ajuden a entendre com interactuen els usuaris amb el lloc (Google Analytics).</li>
+                <li><strong>Cookies d'anàlisi:</strong> Ens ajuden a entendre com interactuen els usuaris amb el lloc
+                  (Google Analytics).</li>
                 <li><strong>Cookies de preferències:</strong> Recorden les vostres preferències de navegació.</li>
               </ul>
               <h4>Gestió de cookies:</h4>
-              <p>Podeu configurar el vostre navegador per bloquejar o eliminar les cookies en qualsevol moment. A continuació us indiquem com fer-ho en els principals navegadors:</p>
+              <p>Podeu configurar el vostre navegador per bloquejar o eliminar les cookies en qualsevol moment. A
+                continuació us indiquem com fer-ho en els principals navegadors:</p>
               <ul>
-                <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer">Google Chrome</a></li>
-                <li><a href="https://support.mozilla.org/ca/kb/esborrar-cookies" target="_blank" rel="noopener noreferrer">Mozilla Firefox</a></li>
-                <li><a href="https://support.apple.com/ca-es/guide/safari/sfri11471/mac" target="_blank" rel="noopener noreferrer">Safari</a></li>
-                <li><a href="https://support.microsoft.com/ca-es/help/17442/windows-internet-explorer-delete-manage-cookies" target="_blank" rel="noopener noreferrer">Internet Explorer</a></li>
+                <li><a href="https://support.google.com/chrome/answer/95647" target="_blank"
+                    rel="noopener noreferrer">Google Chrome</a></li>
+                <li><a href="https://support.mozilla.org/ca/kb/esborrar-cookies" target="_blank"
+                    rel="noopener noreferrer">Mozilla Firefox</a></li>
+                <li><a href="https://support.apple.com/ca-es/guide/safari/sfri11471/mac" target="_blank"
+                    rel="noopener noreferrer">Safari</a></li>
+                <li><a
+                    href="https://support.microsoft.com/ca-es/help/17442/windows-internet-explorer-delete-manage-cookies"
+                    target="_blank" rel="noopener noreferrer">Internet Explorer</a></li>
               </ul>
-              <p>En continuar utilitzant aquest lloc web, accepteu la nostra política de cookies. Si teniu dubtes, podeu contactar amb nosaltres a <strong>legal@secondbyte.cat</strong>.</p>
-              <p class="legal-date"><strong>Data d'actualització:</strong> 15 de març de 2024</p>
+              <p>En continuar utilitzant aquest lloc web, accepteu la nostra política de cookies. Si teniu dubtes, podeu
+                contactar amb nosaltres a <strong><a href="mailto:legal@secondbyte.cat">legal@secondbyte.cat</a></strong>.</p>
+              <p class="legal-date"><strong>Data d'actualització:</strong> 15 de març de 2026</p>
             </div>
           </div>
         </div>
@@ -464,7 +551,7 @@
     <div class="shell">
       <div class="footer-content">
         <div class="footer-brand">
-          <img src="../img/logoRodo.png" alt="SecondByte" />
+          <img src="img/logoRodo.png" alt="SecondByte" onerror="this.style.display='none'" />
           <div><strong>SecondByte</strong><span>Repair & Exchange Hub</span></div>
         </div>
         <div class="footer-links">
@@ -477,13 +564,12 @@
           <a href="#avis-legal">Avís legal</a>
         </div>
         <div class="footer-copyright">
-          <p>© 2024 SecondByte</p>
+          <p>© 2026 SecondByte</p>
           <a href="mailto:support@secondbyte.cat">support@secondbyte.cat</a>
         </div>
       </div>
     </div>
   </footer>
-
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
