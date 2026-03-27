@@ -49,7 +49,7 @@
         <div class="col-md-6 mb-4">
           <div class="card p-3 shadow-sm h-100">
             <h4>📦 Nou Component</h4>
-            <form id="formComponent">
+            <form id="formNewComponent">
               <input type="text" class="form-control mb-2" id="compNom" placeholder="Nom del producte" />
               <select class="form-control mb-2" id="compCategoria">
                 <option value="CPU">CPU</option>
@@ -58,6 +58,8 @@
                 <option value="Placa Base">Placa Base</option>
               </select>
               <input type="number" class="form-control mb-2" id="compPreu" placeholder="Preu base (€)" />
+              <input type="text" class="form-control mb-2" id="compCompatibilitat" placeholder="Compatibilitat (ex: DDR4, AM4)" />
+              <input type="file" id="compImages" class="form-control mb-2" multiple accept="image/*" />
               <button type="button" id="btnSaveComponent" class="btn btn-success btn-block">Publicar Producte</button>
             </form>
           </div>
@@ -66,67 +68,87 @@
         <div class="col-md-6 mb-4">
           <div class="card p-3 shadow-sm h-100 border-primary">
             <h4>📖 Nova Guia de Muntatge</h4>
-            <input type="text" class="form-control mb-2" id="guiaNom" placeholder="Títol de la guia" />
-            
-            <label class="small mb-0 text-muted">Filtrar per Categoria:</label>
-            <select class="form-control mb-2" id="guiaFiltre" onchange="updateComponentDropdown(this.value)">
-              <option value="">-- Tria Categoria --</option>
-              <option value="CPU">CPU</option>
-              <option value="GPU">GPU</option>
-              <option value="RAM">RAM</option>
-              <option value="Placa Base">Placa Base</option>
-            </select>
-
-            <label class="small mb-0 text-muted">Seleccionar Producte (FK):</label>
-            <select class="form-control mb-2" id="guiaIdComp" disabled>
-              <option value="">Primer tria categoria...</option>
-            </select>
-
-            <input type="text" class="form-control mb-2" id="guiaPDF" placeholder="URL del manual PDF" />
-            <button type="button" id="btnSaveGuia" class="btn btn-primary btn-block">Vincular Guia</button>
+            <form id="formNewGuia">
+              <input type="text" class="form-control mb-2" id="guiaNom" placeholder="Títol de la guia" />
+              <select class="form-control mb-2" id="guiaFiltre" onchange="updateComponentDropdown(this.value)">
+                <option value="">-- Filtra per Categoria --</option>
+                <option value="CPU">CPU</option>
+                <option value="GPU">GPU</option>
+                <option value="RAM">RAM</option>
+                <option value="Placa Base">Placa Base</option>
+              </select>
+              <select class="form-control mb-2" id="guiaIdComp" disabled>
+                <option value="">Primer tria categoria...</option>
+              </select>
+              <input type="text" class="form-control mb-2" id="guiaPDF" placeholder="URL del manual PDF" />
+              <button type="button" id="btnSaveGuia" class="btn btn-primary btn-block">Vincular Guia</button>
+            </form>
           </div>
         </div>
       </div>
 
-      <div class="row mb-4">
-        <div class="col-12">
-          <div class="card p-4 shadow-sm border-warning">
-            <h4>💸 Nova Transacció (Compra / Intercanvi)</h4>
-            <hr>
-            <form id="formTransaccio">
-              <div class="row">
-                <div class="col-md-4">
-                  <label class="small">Producte (FK):</label>
-                  <select id="transProducte" class="form-control mb-2"></select>
-                </div>
-                <div class="col-md-4">
-                  <label class="small">Venedor (FK):</label>
-                  <select id="transVenedor" class="form-control mb-2"></select>
-                </div>
-                <div class="col-md-4">
-                  <label class="small">Comprador (FK):</label>
-                  <select id="transComprador" class="form-control mb-2"></select>
-                </div>
-              </div>
-              <div class="row mt-2">
-                <div class="col-md-4">
-                  <label class="small">Tipus:</label>
-                  <select id="transTipus" class="form-control" onchange="togglePreuUI(this.value)">
-                    <option value="true">Compra (Efectiu)</option>
-                    <option value="false">Intercanvi</option>
-                  </select>
-                </div>
-                <div class="col-md-4" id="divPreu">
-                  <label class="small">Preu Final (€):</label>
-                  <input type="number" id="transPreu" class="form-control" value="0">
-                </div>
-                <div class="col-md-4 align-self-end">
-                  <button type="button" id="btnSaveTransaccio" class="btn btn-warning btn-block font-weight-bold">Registrar Transacció</button>
-                </div>
-              </div>
-            </form>
+      <div class="card p-4 mb-4 border-warning shadow-sm">
+        <h4>💸 Nova Transacció</h4>
+        <form id="formTransaccio">
+          <div class="row">
+            <div class="col-md-4">
+              <label class="small">Producte:</label>
+              <select id="transProducte" class="form-control mb-2"></select>
+            </div>
+            <div class="col-md-4">
+              <label class="small">Venedor:</label>
+              <select id="transVenedor" class="form-control mb-2"></select>
+            </div>
+            <div class="col-md-4">
+              <label class="small">Comprador:</label>
+              <select id="transComprador" class="form-control mb-2"></select>
+            </div>
           </div>
-        </div>
+          <div class="row mt-2">
+            <div class="col-md-4">
+              <label class="small">Tipus:</label>
+              <select id="transTipus" class="form-control">
+                <option value="true">Compra (Efectiu)</option>
+                <option value="false">Intercanvi</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="small">Preu Final (€):</label>
+              <input type="number" id="transPreu" class="form-control" value="0">
+            </div>
+            <div class="col-md-4 align-self-end">
+              <button type="button" id="btnSaveTransaccio" class="btn btn-warning btn-block font-weight-bold">Registrar Transacció</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="card p-4 mb-4 border-success shadow-sm">
+        <h4>⭐ Nova Valoració</h4>
+        <form id="formValoracio">
+          <div class="row">
+            <div class="col-md-4">
+              <label class="small">Transacció relacionada (FK):</label>
+              <select id="valTransaccio" class="form-control mb-2"></select>
+            </div>
+            <div class="col-md-4">
+              <label class="small">Usuari a puntuar (FK):</label>
+              <select id="valUsuariPuntuat" class="form-control mb-2"></select>
+            </div>
+            <div class="col-md-4">
+              <label class="small">Puntuació (0-10):</label>
+              <input type="number" id="valPuntuacio" class="form-control" min="0" max="10" value="5">
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-9">
+              <input type="text" id="valComentari" class="form-control" placeholder="Escriu un comentari opcional...">
+            </div>
+            <div class="col-md-3">
+              <button type="button" id="btnSaveValoracio" class="btn btn-success btn-block">Enviar Valoració</button>
+            </div>
+          </div>
+        </form>
       </div>
 
       <div class="text-center py-3">
@@ -149,22 +171,17 @@
   <script src="js/components.js"></script>
   <script src="js/guias.js"></script>
   <script src="js/transaccions.js"></script>
+  <script src="js/valoracions.js"></script>
 
   <script>
-    // --- UTILITATS UI ---
+    // UTILITATS
     function showAlert(text, type) {
       const el = document.getElementById("alert");
       el.innerText = text; el.className = `alert ${type}`; el.style.display = "block";
       setTimeout(() => el.style.display = "none", 4000);
     }
 
-    function togglePreuUI(isCompra) {
-      const p = document.getElementById("transPreu");
-      if(isCompra === "false") p.value = 0;
-      document.getElementById("divPreu").style.opacity = (isCompra === "true") ? "1" : "0.5";
-    }
-
-    // --- CARREGA DE DADES DINÀMIQUES (FK) ---
+    // CARREGA DINÀMICA
     async function updateComponentDropdown(cat) {
       const sel = document.getElementById("guiaIdComp");
       if(!cat) { sel.disabled = true; return; }
@@ -174,56 +191,39 @@
       sel.disabled = false;
     }
 
-    async function cargarFKTransaccions() {
+    async function cargarFKGeneral() {
       const sP = document.getElementById("transProducte");
       const sV = document.getElementById("transVenedor");
       const sC = document.getElementById("transComprador");
+      const sValT = document.getElementById("valTransaccio");
+      const sValU = document.getElementById("valUsuariPuntuat");
 
       const snapP = await components.get();
-      sP.innerHTML = '<option value="">-- Tria Producte --</option>';
+      sP.innerHTML = '<option value="">-- Producte --</option>';
       snapP.forEach(doc => sP.innerHTML += `<option value="${doc.id}">${doc.data().nom}</option>`);
 
       const snapU = await users.get();
-      let optU = '<option value="">-- Tria Usuari --</option>';
+      let optU = '<option value="">-- Usuari --</option>';
       snapU.forEach(doc => optU += `<option value="${doc.id}">${doc.data().nom} (${doc.data().email})</option>`);
-      sV.innerHTML = optU; sC.innerHTML = optU;
+      sV.innerHTML = optU; sC.innerHTML = optU; sValU.innerHTML = optU;
+
+      const snapT = await transaccions.get();
+      sValT.innerHTML = '<option value="">-- Transacció --</option>';
+      snapT.forEach(doc => sValT.innerHTML += `<option value="${doc.id}">ID: ${doc.id.substring(0,6)}...</option>`);
     }
 
-    // --- LOGICA DE BOTONS ---
-    document.getElementById("btnSaveTransaccio").onclick = async () => {
-      const data = {
-        id_Producte: document.getElementById("transProducte").value,
-        id_Vendedor: document.getElementById("transVenedor").value,
-        id_Comprador: document.getElementById("transComprador").value,
-        tipus: document.getElementById("transTipus").value === "true",
-        preu: document.getElementById("transPreu").value
-      };
-
-      if(!data.id_Producte || !data.id_Vendedor || !data.id_Comprador) {
-        return showAlert("Falten camps per seleccionar", "alert-warning");
-      }
-
-      if(data.id_Vendedor === data.id_Comprador) {
-        return showAlert("No pots comprar-te a tu mateix!", "alert-danger");
-      }
-
-      try {
-        await addTransaccio(data);
-        // NETEJA SI TOT VA BÉ
-        document.getElementById("formTransaccio").reset();
-        document.getElementById("divPreu").style.opacity = "1";
-      } catch (e) { /* Error ja gestionat a transaccions.js */ }
-    };
-
+    // EVENTS
     document.getElementById("btnSaveComponent").onclick = async () => {
-      const data = {
+      const formData = {
         nom: document.getElementById("compNom").value,
         categoria: document.getElementById("compCategoria").value,
-        preu: document.getElementById("compPreu").value
+        preu: document.getElementById("compPreu").value,
+        compatibilitat: document.getElementById("compCompatibilitat").value
       };
-      await addComponent(data);
-      document.getElementById("formComponent").reset();
-      cargarFKTransaccions(); // Recarregar llistes
+      const files = document.getElementById("compImages").files;
+      await addComponent(formData, Array.from(files));
+      document.getElementById("formNewComponent").reset();
+      cargarFKGeneral();
     };
 
     document.getElementById("btnSaveGuia").onclick = async () => {
@@ -233,15 +233,79 @@
         ubicacio_PDF: document.getElementById("guiaPDF").value
       };
       await addGuia(data);
+      document.getElementById("formNewGuia").reset();
     };
 
-    // --- AUTH FLOW ---
+    document.getElementById("btnSaveTransaccio").onclick = async () => {
+      const data = {
+        id_Producte: document.getElementById("transProducte").value,
+        id_Vendedor: document.getElementById("transVenedor").value,
+        id_Comprador: document.getElementById("transComprador").value,
+        tipus: document.getElementById("transTipus").value === "true",
+        preu: document.getElementById("transPreu").value
+      };
+
+      if(data.id_Vendedor === data.id_Comprador && data.id_Vendedor !== "") {
+        return showAlert("No pots realitzar una transacció amb tu mateix", "alert-danger");
+      }
+
+      await addTransaccio(data);
+      document.getElementById("formTransaccio").reset();
+      cargarFKGeneral();
+    };
+
+    // LOGICA VALORACIÓ AMB MISSATGE I NETEJA
+document.getElementById("btnSaveValoracio").onclick = async () => {
+      const transId = document.getElementById("valTransaccio").value;
+      const usuariAPuntuar = document.getElementById("valUsuariPuntuat").value;
+      const puntuacio = document.getElementById("valPuntuacio").value;
+      const comentari = document.getElementById("valComentari").value;
+      const currentUser = auth.currentUser;
+
+      if (!transId || !usuariAPuntuar || !puntuacio) {
+        return showAlert("Si us plau, omple tots els camps obligatoris", "alert-warning");
+      }
+
+      try {
+        // 1. Obtenir dades de la transacció per seguretat en el cliente
+        const transDoc = await db.collection("transaccions").doc(transId).get();
+        if (!transDoc.exists) throw new Error("La transacció no existeix.");
+
+        const tData = transDoc.data();
+        
+        // 2. Comprovar si l'usuari actual és part de la transacció
+        const esComprador = tData.id_Comprador === currentUser.uid;
+        const esVenedor = tData.id_Vendedor === currentUser.uid;
+
+        if (!esComprador && !esVenedor) {
+          return showAlert("Només els participants d'aquesta transacció poden puntuar", "alert-danger");
+        }
+
+        // 3. Preparar dades exactes segons espera valoracions.js y las Rules
+        // Nota: id_UsuariPuntuador s'afegeix dins de valoracions.js mitjançant auth.currentUser
+        const data = {
+          id_Transaccio: transId,
+          id_UsuariPuntuat: usuariAPuntuar,
+          puntuacio: puntuacio,
+          comentari: comentari
+        };
+
+        await addValoracio(data);
+        
+        document.getElementById("formValoracio").reset();
+        // Opcional: recarregar dades si cal
+      } catch (e) {
+        console.error(e);
+        showAlert("Error al enviar la valoració: " + e.message, "alert-danger");
+      }
+    };
+    // AUTH
     auth.onAuthStateChanged(user => {
       if (user) {
         document.getElementById("loginForm").style.display = "none";
         document.getElementById("signupForm").style.display = "none";
         document.getElementById("appContent").style.display = "block";
-        cargarFKTransaccions();
+        cargarFKGeneral();
       } else {
         document.getElementById("appContent").style.display = "none";
         document.getElementById("loginForm").style.display = "block";
@@ -263,13 +327,11 @@
         telefon: document.getElementById("signupTelefon").value,
         provincia: document.getElementById("signupProvincia").value
       };
-      try {
-        const cred = await auth.createUserWithEmailAndPassword(e, p);
-        await addUser(cred, extra);
-      } catch (err) { showAlert(err.message, "alert-danger"); }
+      const cred = await auth.createUserWithEmailAndPassword(e, p);
+      await addUser(cred, extra);
     };
 
-    document.getElementById("logout").onclick = () => auth.signOut().then(() => location.reload());
+    document.getElementById("logout").onclick = () => { auth.signOut().then(() => location.reload()); };
     document.getElementById("newUser").onclick = () => { document.getElementById("loginForm").style.display="none"; document.getElementById("signupForm").style.display="block"; };
     document.getElementById("backToLogin").onclick = () => { document.getElementById("signupForm").style.display="none"; document.getElementById("loginForm").style.display="block"; };
 

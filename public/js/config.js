@@ -16,3 +16,4 @@ const users        = db.collection("usuaris");
 const components   = db.collection("components");
 const guias        = db.collection("guias");
 const transaccions = db.collection("transaccions");
+const valoracions = db.collection("valoracions");
